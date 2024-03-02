@@ -16,8 +16,8 @@ const VisitorsForm = () => {
     onSubmit={handleSubmit(onSubmit)}
     className="w-full flex flex-col py-4"
   >
-    <div className="w-full flex items-center gap-2">
-      <div className="w-[50%] flex flex-col">
+    <div className="w-full flex flex-col md:flex-row items-center gap-2">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
           Email <span className="text-red-700">*</span>
         </label>
@@ -29,7 +29,7 @@ const VisitorsForm = () => {
           disabled
         />
       </div>
-      <div className="w-[50%] flex flex-col">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
           First name <span className="text-red-700">*</span>
         </label>
@@ -48,7 +48,7 @@ const VisitorsForm = () => {
           placeholder="Enter first name"
         />
       </div>
-      <div className="w-[50%] flex flex-col">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
           Last name <span className="text-red-700">*</span>
         </label>
@@ -60,8 +60,8 @@ const VisitorsForm = () => {
         {/* {errors.lastname && <span>This field is required</span>} */}
       </div>
     </div>
-    <div className="w-full flex items-center gap-2 mt-3">
-      <div className="w-[50%] flex flex-col">
+    <div className="w-full flex flex-col md:flex-row items-center gap-2 mt-3">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
           Gender<span className="text-red-700">*</span>
         </label>
@@ -73,7 +73,7 @@ const VisitorsForm = () => {
           <option value="male">Male</option>
         </select>
       </div>
-      <div className="w-[50%] flex flex-col">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
           Profession <span className="text-red-700">*</span>
         </label>
@@ -87,8 +87,8 @@ const VisitorsForm = () => {
         </select>
       </div>
     </div>
-    <div className="w-full flex items-center gap-2 mt-3">
-      <div className="w-[50%] flex flex-col">
+    <div className="w-full flex flex-col md:flex-row  items-center gap-2 mt-3">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
           Medical Board NUmber(KMPD, NCK, COC, PPB){" "}
           <span className="text-red-700">*</span>
@@ -100,7 +100,7 @@ const VisitorsForm = () => {
         />
         {/* {errors.lastname && <span>This field is required</span>} */}
       </div>
-      <div className="w-[50%] flex flex-col">
+      <div className="w-full md:w-[50%] flex flex-col">
         <label className="text-[15px] text-[#666666]">
         Name of the workplace <span className="text-red-700">*</span>
         </label>
@@ -114,8 +114,8 @@ const VisitorsForm = () => {
         </select>
       </div>
     </div>
-    <div className="w-full flex items-center gap-2 mt-3">
-      <div className="w-[50%] flex flex-col">
+    <div className="w-full flex flex-col md:flex-row items-center gap-2 mt-3">
+      <div className="w-full md:w-[50%]  flex flex-col">
         <label className="text-[15px] text-[#666666]">
           Name of Avenue Hospital/Clinic/Office
           <span className="text-red-700">*</span>

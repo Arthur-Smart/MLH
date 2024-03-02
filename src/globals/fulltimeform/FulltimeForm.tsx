@@ -15,8 +15,8 @@ const FulltimeForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="w-full flex flex-col py-4"
     >
-      <div className="w-full flex items-center gap-2">
-        <div className="w-[50%] flex flex-col">
+      <div className="w-full flex flex-col md:flex-row items-center gap-2">
+        <div className="w-full md:w-[50%] flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Email <span className="text-red-700">*</span>
           </label>
@@ -28,7 +28,7 @@ const FulltimeForm = () => {
             disabled
           />
         </div>
-        <div className="w-[50%] flex flex-col">
+        <div className="w-full md:w-[50%]flex flex-col">
           <label className="text-[15px] text-[#666666]">
             First name <span className="text-red-700">*</span>
           </label>
@@ -47,7 +47,7 @@ const FulltimeForm = () => {
             placeholder="Enter first name"
           />
         </div>
-        <div className="w-[50%] flex flex-col">
+        <div className="w-full md:w-[50%] flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Last name <span className="text-red-700">*</span>
           </label>
@@ -59,8 +59,8 @@ const FulltimeForm = () => {
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
       </div>
-      <div className="w-full flex items-center gap-2 mt-3">
-        <div className="w-[50%] flex flex-col">
+      <div className="w-full flex flex-col md:flex-row  items-center gap-2 mt-3">
+        <div className="w-full md:w-[50%]  flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Gender<span className="text-red-700">*</span>
           </label>
@@ -72,7 +72,7 @@ const FulltimeForm = () => {
             <option value="male">Male</option>
           </select>
         </div>
-        <div className="w-[50%] flex flex-col">
+        <div className="w-full md:w-[50%]  flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Profession <span className="text-red-700">*</span>
           </label>
@@ -86,8 +86,8 @@ const FulltimeForm = () => {
           </select>
         </div>
       </div>
-      <div className="w-full flex items-center gap-2 mt-3">
-        <div className="w-[50%] flex flex-col">
+      <div className="w-full  flex flex-col md:flex-row items-center gap-2 mt-3">
+        <div className="w-full md:w-[50%] flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Medical Board NUmber(KMPD, NCK, COC, PPB){" "}
             <span className="text-red-700">*</span>
@@ -99,7 +99,7 @@ const FulltimeForm = () => {
           />
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
-        <div className="w-[50%] flex flex-col">
+        <div className="w-full md:w-[50%]flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Ward/Unit <span className="text-red-700">*</span>
           </label>
@@ -113,8 +113,8 @@ const FulltimeForm = () => {
           </select>
         </div>
       </div>
-      <div className="w-full flex items-center gap-2 mt-3">
-        <div className="w-[50%] flex flex-col">
+      <div className="w-full flex flex-col md:flex-row  items-center gap-2 mt-3">
+        <div className="w-full md:w-[50%] flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Name of Avenue Hospital/Clinic/Office
             <span className="text-red-700">*</span>
@@ -129,7 +129,7 @@ const FulltimeForm = () => {
           </select>
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
-        <div className="w-[50%] flex flex-col">
+        <div className="w-full md:w-[50%] flex flex-col">
           <label className="text-[15px] text-[#666666]">
             Department <span className="text-red-700">*</span>
           </label>

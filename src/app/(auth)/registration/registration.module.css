@@ -25,3 +25,19 @@ cursor:not-allowed;
        display: none;
     }
 }
+
+@media screen and (max-width:487px){
+    .email_form{
+        flex-direction: column;
+    }
+
+    .email_form input[type="email"]{
+        width:100%;
+    }
+
+    .email_form input[type="submit"]{
+        width:100%;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+}

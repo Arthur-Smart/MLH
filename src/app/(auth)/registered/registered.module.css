@@ -1,0 +1,28 @@
+.flyer{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+/* Media query */
+@media screen and (max-width:830px){
+    .success{
+        flex-direction: column;
+    }
+    .flyer_container{
+       display: none;
+    }
+
+    .success_container{
+        width:100%;
+    }
+
+    .success_message{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .success_message h1{
+        text-align: center;
+    }
+}
