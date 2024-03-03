@@ -10,9 +10,11 @@ const FulltimeForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isSubmitting },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await  new Promise((resolve) => setTimeout(resolve, 2500));
+  
     console.log(data);
     router.push("/success")
   }
@@ -166,11 +168,13 @@ const FulltimeForm = () => {
         <p className="text-[#ED0000]">Please fill all the input fields</p>
       )}
 
-      <input
-        // disabled={!isDirty || !isValid}
+      <button
+        disabled={isSubmitting}
         type="submit"
-        className="py-3 px-4 bg-[#2C2C74] w-[100px] flex self-end items-center justify-center text-white rounded-md mt-2"
-      />
+        className="py-3 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2"
+      >
+        {isSubmitting ? "Submitting..." : "Register"}
+        </button>
     </form>
   );
 };
