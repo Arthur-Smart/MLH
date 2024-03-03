@@ -4,6 +4,7 @@ import Image from "next/image";
 import FLYER from "../../../../public/flyer.svg";
 import THUMB from "../../../../public/thumb.svg";
 import CALENDAR from "../../../../public/calendar.svg";
+import CLOCK from "../../../../public/time.svg";
 
 const page = () => {
   return (
@@ -39,7 +40,7 @@ const page = () => {
             <p className="text-white text-[14px] md:text-[15px]  ml-2">24 May 2024</p>
           </div>
           <div className="flex items-center ml-11">
-            <Image src={CALENDAR} alt="" width={17} height={7} />
+          <Image src={CLOCK} alt="" width={19} height={9} />
             <p className="text-white text-[14px] md:text-[15px] ml-2">
               10:00AM - 12:00PM
             </p>

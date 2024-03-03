@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import CALENDAR from "../../public/calendar.svg";
+import CLOCK from "../../public/time.svg";
 import FLYER from "../../public/flyer.svg";
 import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -47,9 +48,9 @@ export default function Home() {
   }, [selectedOption]);
 
   return (
-    <main className="main h-[90vh]">
-      <div className="registration w-[100%]  flex">
-        <div className="form px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`">
+    <main className="main ">
+      <div className="registration w-[100%] h-full flex">
+        <div className="form px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`">
           <div className="flex flex-col text-center">
             <h1 className="font-bold text-2xl md:text-4xl text-white">
               Avenue Hospital Event
@@ -68,7 +69,7 @@ export default function Home() {
               </p>
             </div>
             <div className="flex items-center ml-11">
-              <Image src={CALENDAR} alt="" width={17} height={7} />
+              <Image src={CLOCK} alt="" width={19} height={9} />
               <p className="text-white text-[14px] md:text-[15px] ml-2">
                 10:00AM - 12:00PM
               </p>
