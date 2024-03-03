@@ -164,9 +164,9 @@ const FulltimeForm = () => {
           </select>
         </div>
       </div>
-      {errors && (
+      {errors.boardNumber || errors.firstname ||errors.lastname  ? (
         <p className="text-[#ED0000]">Please fill all the input fields</p>
-      )}
+      ) : ("")}
 
       <button
         disabled={isSubmitting}

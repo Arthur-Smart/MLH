@@ -121,7 +121,7 @@ export default function Home() {
             />
             <input
               disabled={!isDirty || !isValid}
-              className="email_btn py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] text-[#2C2C74]"
+              className="email_btn py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74]"
               type="submit"
               value="Access Activity"
             />

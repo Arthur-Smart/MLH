@@ -153,9 +153,9 @@ const VisitorsForm = () => {
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
       </div>
-      {errors && (
+      {errors.boardNumber || errors.firstname || errors.lastname ||errors.name ? (
         <p className="text-[#ED0000]">Please fill all the input fields</p>
-      )}
+      ) : ("")}
        <button
         disabled={isSubmitting}
         type="submit"
