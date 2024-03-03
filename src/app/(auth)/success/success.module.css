@@ -22,6 +22,16 @@
         justify-content: center;
     }
 
+    .time_date{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .counter{
+        align-items: center;
+        justify-content: center;
+    }
+
     .success_message h1{
         text-align: center;
     }

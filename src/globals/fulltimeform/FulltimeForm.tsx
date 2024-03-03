@@ -7,9 +7,10 @@ const FulltimeForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid, isDirty  },
+    formState: { errors, isValid, isDirty },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -22,10 +23,14 @@ const FulltimeForm = () => {
           </label>
           <input
             defaultValue="johndoe@gmail.com"
-            {...register("email")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            {...register("email", {required:true})} readOnly
+            className={
+              errors.email
+                ? "w-full border-[#ED0000]] border-[1px] rounded-md py-2 px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            }
             placeholder="Enter email"
-            disabled
+            // disabled
           />
         </div>
         <div className="w-full md:w-[50%]flex flex-col">
@@ -33,17 +38,14 @@ const FulltimeForm = () => {
             First name <span className="text-red-700">*</span>
           </label>
           <input
-            // defaultValue="test"
             {...register("firstname", {
-              required: "Email is required",
-              validate: (value) => {
-                if (!value.includes("@")) {
-                  return "This is not a valid email";
-                }
-                return true;
-              },
+              required: true,
             })}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className={
+              errors.firstname
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            }
             placeholder="Enter first name"
           />
         </div>
@@ -53,7 +55,11 @@ const FulltimeForm = () => {
           </label>
           <input
             {...register("lastname", { required: true })}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className={
+              errors.lastname
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            }
             placeholder="Enter lastname"
           />
           {/* {errors.lastname && <span>This field is required</span>} */}
@@ -94,7 +100,11 @@ const FulltimeForm = () => {
           </label>
           <input
             {...register("boardNumber", { required: true })}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className={
+              errors.boardNumber
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            }
             placeholder="Enter board number"
           />
           {/* {errors.lastname && <span>This field is required</span>} */}
@@ -105,7 +115,11 @@ const FulltimeForm = () => {
           </label>
           <select
             {...register("unit")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className={
+              errors.unit
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            }
           >
             <option value="medical">Medical Doctor</option>
             <option value="it">IT</option>
@@ -143,8 +157,12 @@ const FulltimeForm = () => {
           </select>
         </div>
       </div>
+      {errors && (
+        <p className="text-[#ED0000]">Please fill all the input fields</p>
+      )}
+
       <input
-      disabled={!isDirty || !isValid}
+        // disabled={!isDirty || !isValid}
         type="submit"
         className="py-3 px-4 bg-[#2C2C74] w-[100px] flex self-end items-center justify-center text-white rounded-md mt-2"
       />

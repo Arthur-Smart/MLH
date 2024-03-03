@@ -11,7 +11,7 @@ const page = () => {
       <div
         className={`${styles.success_container} px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
       >
-        <div className={`${styles.success_message} flex flex-col`}>
+        <div className={`${styles.success_message} flex flex-col md:w-[70%]`}>
           <Image
             src={ENVELOP}
             alt="Medical Learning Hub"
@@ -19,7 +19,7 @@ const page = () => {
             height={40}
             className="mb-2"
           />
-          <h1 className="text-start text-white font-medium text-base md:text-xl">
+          <h1 className="text-start text-white font-medium text-xl md:text-2xl">
             Registration successfull. <br></br>
             Access link has been sent to you.
           </h1>
@@ -29,21 +29,21 @@ const page = () => {
         </div>
 
         {/* Time and date */}
-        <div className="flex items-center justify-center mt-14">
+        <div className={`${styles.time_date} flex items-center mt-14 md:w-[70%]`}>
           <div className="flex items-center">
             <Image src={CALENDAR} alt="" width={17} height={7} />
-            <p className="text-white text-[15px] ml-2">24 May 2024</p>
+            <p className="text-white text-[14px] md:text-[15px] ml-2">24 May 2024</p>
           </div>
           <div className="flex items-center ml-11">
             <Image src={CALENDAR} alt="" width={17} height={7} />
-            <p className="text-white sm:text-[14px] text-[15px] ml-2">
+            <p className="text-white text-[14px] md:text-[15px] ml-2">
               10:00AM - 12:00PM
             </p>
           </div>
         </div>
 
         {/* Counter */}
-        <div className="flex items-center mt-7">
+        <div className={`${styles.counter} flex items-center mt-7 md:w-[70%]`}>
           <div className="flex flex-col items-center justify-center">
             <h2 className="font-bold text-2xl text-white">35</h2>
             <p className="text-white">Days</p>

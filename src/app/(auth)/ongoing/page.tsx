@@ -9,11 +9,11 @@ const page = () => {
   return (
     <main className={`${styles.success} w-screen flex`}>
       <div
-        className={`${styles.success_container} px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
+        className={`${styles.success_container} px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] `}
       >
         <div className={`${styles.success_message} flex flex-col `}>
          
-          <h1 className="text-center text-white font-medium text-base md:text-[28px]">
+          <h1 className="text-center text-white font-medium text-xl md:text-2xl">
            Activity is Ongoing
           </h1>
           <p className="text-[#BBB5D0] text-center text-md">
