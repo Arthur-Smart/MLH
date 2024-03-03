@@ -169,7 +169,7 @@ export default function Home() {
                 checked={selectedOption === "full-staff"}
                 onChange={() => handleRadioChange("full-staff")}
               />
-              <p className="ml-2">Fulltime Avenue Staff</p>
+              <p className="text-base ml-2 text-gray-800">Fulltime Avenue Staff</p>
             </div>
             <div className="flex items-center md:ml-4">
               <input
@@ -177,7 +177,7 @@ export default function Home() {
                 checked={selectedOption === "locum"}
                 onChange={() => handleRadioChange("locum")}
               />
-              <p className="ml-2">Locum Avenue staff</p>
+              <p className="text-base  ml-2 text-gray-800">Locum Avenue staff</p>
             </div>
             <div className="flex items-center md:ml-4">
               <input
@@ -185,7 +185,7 @@ export default function Home() {
                 checked={selectedOption === "external"}
                 onChange={() => handleRadioChange("external")}
               />
-              <p className="ml-2">External/Visitor</p>
+              <p className="text-base ml-2 text-gray-800">External/Visitor</p>
             </div>
           </div>
         </div>

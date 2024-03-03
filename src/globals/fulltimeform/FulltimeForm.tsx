@@ -1,15 +1,21 @@
-import { Inputs } from "@/interface/FormInterface";
 import React from "react";
+import { useRouter } from 'next/navigation'
+import { Inputs } from "@/interface/FormInterface";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const FulltimeForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isValid, isDirty },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    router.push("/success")
+  }
 
   return (
     <form
@@ -30,7 +36,6 @@ const FulltimeForm = () => {
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
             }
             placeholder="Enter email"
-            // disabled
           />
         </div>
         <div className="w-full md:w-[50%]flex flex-col">
@@ -62,7 +67,7 @@ const FulltimeForm = () => {
             }
             placeholder="Enter lastname"
           />
-          {/* {errors.lastname && <span>This field is required</span>} */}
+         
         </div>
       </div>
       <div className="w-full flex flex-col md:flex-row  items-center gap-2 mt-3">
