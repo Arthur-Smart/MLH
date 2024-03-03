@@ -22,7 +22,7 @@ const page = () => {
           />
           <h1 className="text-start text-white font-medium text-xl md:text-2xl">
             Registration successfull. <br></br>
-            Access link has been sent to you.
+            Access link has been sent to your email.
           </h1>
           <p className="text-[#BBB5D0] text-base">
             (See below dates for event)

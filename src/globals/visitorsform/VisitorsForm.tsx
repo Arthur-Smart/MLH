@@ -1,16 +1,21 @@
 import React from "react";
+import { useRouter } from 'next/navigation'
 import styles from "./visitorsform.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Inputs } from "@/interface/FormInterface";
 
 const VisitorsForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+    router.push("/success")};
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

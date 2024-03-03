@@ -48,7 +48,7 @@ export default function Home() {
   }, [selectedOption]);
 
   return (
-    <main className="main ">
+    <main className="main">
       <div className="registration w-[100%] h-full flex">
         <div className="form px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`">
           <div className="flex flex-col text-center">
@@ -163,29 +163,29 @@ export default function Home() {
         <div className="container">
           <h1 className="font-bold text-[16px] mt-4">Type of staff</h1>
           <div className="flex  mt-2 flex flex-col md:flex-row pb-6">
-            <div className="flex items-center">
+            <div className="flex items-center mb-2">
               <input
                 type="radio"
                 checked={selectedOption === "full-staff"}
                 onChange={() => handleRadioChange("full-staff")}
               />
-              <p className="text-base ml-2 text-gray-800">Fulltime Avenue Staff</p>
+              <p className="text-base ml-2 text-black-700/50">Fulltime Avenue Staff</p>
             </div>
-            <div className="flex items-center md:ml-4">
+            <div className="flex items-center mb-2 md:ml-4">
               <input
                 type="radio"
                 checked={selectedOption === "locum"}
                 onChange={() => handleRadioChange("locum")}
               />
-              <p className="text-base  ml-2 text-gray-800">Locum Avenue staff</p>
+              <p className="text-base  ml-2 text-black-700/50">Locum Avenue staff</p>
             </div>
-            <div className="flex items-center md:ml-4">
+            <div className="flex items-center mb-2 md:ml-4">
               <input
                 type="radio"
                 checked={selectedOption === "external"}
                 onChange={() => handleRadioChange("external")}
               />
-              <p className="text-base ml-2 text-gray-800">External/Visitor</p>
+              <p className="text-base ml-2 text-black-700/50">External/Visitor</p>
             </div>
           </div>
         </div>
