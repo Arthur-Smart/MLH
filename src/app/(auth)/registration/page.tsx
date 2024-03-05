@@ -5,6 +5,8 @@ import Image from "next/image";
 import CALENDAR from "../../../../public/calendar.svg";
 import CLOCK from "../../../../public/time.svg";
 import FLYER from "../../../../public/flyer.svg";
+import CERTIFICATE from "../../../../public/certificate.svg"
+import LANGUAGE from "../../../../public/language.svg"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IEmail } from "@/interface/FormInterface";
 import styles from "./registration.module.css";
@@ -39,8 +41,8 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
-      <div className={`${styles.registration} w-[100%] h-full flex`}>
+    <main className="main">
+      <section className={`${styles.registration} w-[100%] h-full flex`}>
         <div
           className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
         >
@@ -144,10 +146,28 @@ export default function Home() {
               width={1300}
               height={1300}
               className="flyer"
+              priority
             />
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Activity Details */}
+      <section className="container flex flex-col py-10">
+        <div className="w-full flex items-center gap-5">
+          <div className="flex items-center">
+            <Image src={CERTIFICATE} alt="CPD Certificates" width={25} height={25}/>
+            <p className="text-base font-medium ml-2">CPD certificate</p>
+          </div>
+          <div className="flex items-center">
+            <Image src={LANGUAGE} alt="Activity Language" width={30} height={30}/>
+            <p className="text-base font-medium ml-2">CPD certificate</p>
+          </div>
+          <div className="rounded-full bg-[#AAA2C4] px-5 py-2">
+            <p className="text-[#2C2C74]">Free</p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
