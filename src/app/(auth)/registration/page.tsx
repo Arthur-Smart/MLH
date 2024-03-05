@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import CALENDAR from "../../../../public/calendar.svg";
 import CLOCK from "../../../../public/time.svg";
 import FLYER from "../../../../public/flyer.svg";
-import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IEmail } from "@/interface/FormInterface";
-import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
-import styles from "./registration.module.css"
+import styles from "./registration.module.css";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -32,26 +38,12 @@ export default function Home() {
     setIsEmail(true);
   };
 
-  // Scroll to filter staffs radio buttons
-  useEffect(() => {
-    filterStaffsRef?.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, [isEmail]);
-
-  // Scroll to forms
-  useEffect(() => {
-    formsRef?.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, [selectedOption]);
-
   return (
     <main className={styles.main}>
       <div className={`${styles.registration} w-[100%] h-full flex`}>
-        <div className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}>
+        <div
+          className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
+        >
           <div className="flex flex-col text-center">
             <h1 className="font-bold text-2xl md:text-4xl text-white">
               Avenue Hospital Event
@@ -120,17 +112,29 @@ export default function Home() {
                   : "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px]"
               }
             />
-            <input
-              disabled={!isDirty || !isValid}
-              className="email_btn py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74]"
-              type="submit"
-              value="Access Activity"
-            />
+            <Dialog>
+              <DialogTrigger>
+                <input
+                  disabled={!isDirty || !isValid}
+                  className="email_btn py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74]"
+                  type="submit"
+                  value="Access Activity"
+                />
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Register for the activity</DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </form>
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
           )}
-          
         </div>
         <div className="flyer_container w-[50%] h-[100%} overflow-hidden">
           <div className="h-[100%]">
@@ -144,51 +148,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* FIlter forms */}
-      {isEmail && (
-        <div className="container">
-          <h1 className="font-bold text-[16px] mt-4">Type of staff</h1>
-          <div className="flex  mt-2 flex flex-col md:flex-row pb-6">
-            <div className="flex items-center mb-2">
-              <input
-                type="radio"
-                checked={selectedOption === "full-staff"}
-                onChange={() => handleRadioChange("full-staff")}
-              />
-              <p className="text-base ml-2 text-black-700/50">Fulltime Avenue Staff</p>
-            </div>
-            <div className="flex items-center mb-2 md:ml-4">
-              <input
-                type="radio"
-                checked={selectedOption === "locum"}
-                onChange={() => handleRadioChange("locum")}
-              />
-              <p className="text-base  ml-2 text-black-700/50">Locum Avenue staff</p>
-            </div>
-            <div className="flex items-center mb-2 md:ml-4">
-              <input
-                type="radio"
-                checked={selectedOption === "external"}
-                onChange={() => handleRadioChange("external")}
-              />
-              <p className="text-base ml-2 text-black-700/50">External/Visitor</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div ref={filterStaffsRef} />
-
-      {/*Registration forms goes here*/}
-      <div className="container mt-5">
-        {/* Fulltime & locum staffs form */}
-        {selectedOption == "full-staff" && <FulltimeForm />}
-        {selectedOption == "locum" && <FulltimeForm />}
-        {/* Visitors form */}
-        {selectedOption == "external" && <VisitorsForm />}
-      </div>
-      <div ref={formsRef} />
     </main>
   );
 }
