@@ -122,16 +122,16 @@ export default function Home() {
                   value="Access Activity"
                 />
               </DialogTrigger>
-              <DialogContent className="md:min-w-[800px]">
+              <DialogContent className=" md:min-w-[800px] overflow-y-scroll h-[500px] no-scrollbar">
                 <DialogHeader>
-                  <DialogTitle className="text-xl mt-7 font-semibold">
+                  <DialogTitle className="text-xl text-start mt-7 font-semibold">
                     Register for the activity
                   </DialogTitle>
                   <DialogDescription>
-                    <p className="text-lg text-black font-medium">
+                    <p className="text-lg text-start text-black font-medium">
                       Type of staff
                     </p>
-                    <div className="w-full flex items-center justify-between mt-3">
+                    <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-3">
                       <div className="flex items-center">
                         <input
                           type="radio"
@@ -158,8 +158,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="w-full mt-3 flex flex-wrap">
-                      <FulltimeForm/>
-                      {/* <VisitorsForm/> */}
+                      {selectedOption == "fulltime" && <FulltimeForm/>}
+                      {selectedOption == "locum" && <FulltimeForm/>}
+                      {selectedOption == "external" && <VisitorsForm/>}
+                      
                     </div>
                   </DialogDescription>
                 </DialogHeader>
@@ -170,7 +172,7 @@ export default function Home() {
             <span className="text-red-500">{errors.email.message}</span>
           )}
         </div>
-        <div className="flyer_container w-[50%] h-[100%} overflow-hidden">
+        <div className={`${styles.flyer_container} w-[50%] h-[100%} overflow-hidden`}>
           <div className="h-[100%]">
             <Image
               src={FLYER}
