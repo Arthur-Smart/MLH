@@ -2,9 +2,9 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import CALENDAR from "../../../../public/calendar.svg";
-import CLOCK from "../../../../public/time.svg";
-import FLYER from "../../../../public/flyer.svg";
+import CALENDAR from "../../../../../public/calendar.svg";
+import CLOCK from "../../../../../public/time.svg";
+import FLYER from "../../../../../public/flyer.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IEmail } from "@/interface/FormInterface";
 import styles from "./registration.module.css";
@@ -55,7 +55,7 @@ export default function Home() {
           className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
         >
           <div className="flex flex-col text-center">
-            <h1 className="font-bold text-2xl md:text-4xl text-white">
+            <h1 className="font-bold text-2xl md:text-3xl text-white">
               Avenue Hospital Event
             </h1>
             <p className="text-white text-md md:text-xl">
