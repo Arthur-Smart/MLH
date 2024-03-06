@@ -24,8 +24,17 @@ export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isEmail, setIsEmail] = useState(false);
 
+  const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
-  const handleOptionChange = (option:any) => {
+  const scrollToActivityDetails = () => {
+    if (ActivityDetailRef.current) {
+      ActivityDetailRef?.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleOptionChange = (option: any) => {
     setSelectedOption(option);
   };
 
@@ -95,24 +104,24 @@ export default function Home() {
             onSubmit={handleSubmit(onSubmit)}
             className={`${styles.email_form} flex mt-9`}
           >
-              <Dialog>
-            <input
-              {...register("email", {
-                required: true,
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "This is not a valid email",
-                },
-              })}
-              type="email"
-              placeholder="Enter your email"
-              className={
-                errors.email
-                  ? "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px] border-[1px] border-[red]"
-                  : "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px]"
-              }
-            />
-          
+            <Dialog>
+              <input
+                {...register("email", {
+                  required: true,
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "This is not a valid email",
+                  },
+                })}
+                type="email"
+                placeholder="Enter your email"
+                className={
+                  errors.email
+                    ? "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px] border-[1px] border-[red]"
+                    : "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px]"
+                }
+              />
+
               <DialogTrigger>
                 <input
                   disabled={!isDirty || !isValid}
@@ -157,10 +166,9 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="w-full mt-3 flex flex-wrap">
-                      {selectedOption == "fulltime" && <FulltimeForm/>}
-                      {selectedOption == "locum" && <FulltimeForm/>}
-                      {selectedOption == "external" && <VisitorsForm/>}
-                      
+                      {selectedOption == "fulltime" && <FulltimeForm />}
+                      {selectedOption == "locum" && <FulltimeForm />}
+                      {selectedOption == "external" && <VisitorsForm />}
                     </div>
                   </DialogDescription>
                 </DialogHeader>
@@ -170,8 +178,27 @@ export default function Home() {
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
           )}
+
+          <div onClick={scrollToActivityDetails} className="animate-bounce w-14 h-14 mt-11 cursor-pointer bg-[#AAA2C4] rounded-full flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
+              />
+            </svg>
+          </div>
         </div>
-        <div className={`${styles.flyer_container} w-[50%] h-[100%} overflow-hidden`}>
+        <div
+          className={`${styles.flyer_container} w-[50%] h-[100%} overflow-hidden`}
+        >
           <div className="h-[100%]">
             <Image
               src={FLYER}
@@ -186,7 +213,7 @@ export default function Home() {
       </section>
 
       {/* Activity Details */}
-      <section className="container flex flex-col py-10">
+      <section ref={ActivityDetailRef} className="container flex flex-col py-10">
         <EventDetails />
       </section>
     </main>
