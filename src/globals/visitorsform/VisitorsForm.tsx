@@ -153,8 +153,19 @@ const VisitorsForm = () => {
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
       </div>
+      <div className="w-full flex flex-col mt-3">
+        <p className="text-[#666666] text-base ">By submitting this information, one is allowing MLH to share this date with the activity for all instances provider</p>
+        <div className="flex items-center mt-2">
+        <input type="checkbox" {...register("skip")}/>
+        <p className="text-black ml-2 text-[16px]">What to skip re-entering registration info for this organizer's activities. Check this.</p>
+        </div>   
+        <div className="flex items-center mt-3">
+        <input type="checkbox" {...register("terms", {required:true})}/>
+        <p className={errors.terms ? "text-[#ED0000] ml-2 text-[16px]" : "text-black ml-2 text-[16px]"}>To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
+        </div>  
+      </div>
       {errors.boardNumber || errors.firstname || errors.lastname ||errors.name ? (
-        <p className="text-[#ED0000] mt-2">Please fill all the input fields</p>
+        <p className="text-[#ED0000] mt-4">Please fill all the input fields</p>
       ) : ("")}
        <button
         disabled={isSubmitting}

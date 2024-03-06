@@ -130,7 +130,7 @@ export default function Home() {
                   value="Access Activity"
                 />
               </DialogTrigger>
-              <DialogContent className=" md:min-w-[800px] overflow-y-scroll h-[500px] no-scrollbar">
+              <DialogContent className=" md:min-w-[850px] overflow-y-scroll h-[550px] no-scrollbar">
                 <DialogHeader>
                   <DialogTitle className="text-xl text-start mt-7 font-semibold">
                     Register for the activity
@@ -146,7 +146,7 @@ export default function Home() {
                           checked={selectedOption === "fulltime"}
                           onChange={() => handleOptionChange("fulltime")}
                         />
-                        <p className="ml-2 text-base">Fulltime Avenue Staff</p>
+                        <p className="ml-2 text-base text-black">Fulltime Avenue Staff</p>
                       </div>
                       <div className="flex items-center">
                         <input
@@ -154,7 +154,7 @@ export default function Home() {
                           checked={selectedOption === "locum"}
                           onChange={() => handleOptionChange("locum")}
                         />
-                        <p className="ml-2 text-base">Locum Avenue Staff</p>
+                        <p className="ml-2 text-base text-black">Locum Avenue Staff</p>
                       </div>
                       <div className="flex items-center">
                         <input
@@ -162,7 +162,7 @@ export default function Home() {
                           checked={selectedOption === "external"}
                           onChange={() => handleOptionChange("external")}
                         />
-                        <p className="ml-2 text-base">External/Visitor</p>
+                        <p className="ml-2 text-base text-black">External/Visitor</p>
                       </div>
                     </div>
                     <div className="w-full mt-3 flex flex-wrap">

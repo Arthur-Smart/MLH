@@ -8,6 +8,8 @@ export interface Inputs {
   unit:string
   name:string
   department?:string
+  skip:string
+  terms:string
 }
 
 export interface IEmail {
