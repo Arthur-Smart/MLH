@@ -50,7 +50,7 @@ const EventDetails = () => {
 
       {/* Overview | Agenda | Prerequisite Details */}
       <div className="flex flex-col mt-7">
-        <div>
+        <div className="mb-2">
           <h1 className="text-[#333333] font-semibold text-lg">Overview one</h1>
           <p className="text-[#333333]">
             Contrary to popular belief, Lorem Ipsum is not simply random text.
