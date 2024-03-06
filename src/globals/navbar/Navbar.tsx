@@ -98,7 +98,7 @@ function Navbar() {
               <input className="outline-0 bg-transparent text-[#8B8B8B]" type="text" placeholder="Enter activity name"/>
               
             </div>
-            <div className="p-3 rounded-full bg-[#D91F4F] cursor-pointer">
+            <div className="p-3 rounded-full bg-[#D91F4F] hover:bg-[#D91F4F]/80 cursor-pointer">
             <Image src={SEARCH_ICON} alt="" width={20} height={20}/>
             </div>
           </PopoverContent>
