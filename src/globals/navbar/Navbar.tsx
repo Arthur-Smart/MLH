@@ -72,7 +72,7 @@ function Navbar() {
                 <option >Ghana</option>
               </select>
             </div>
-            <div className="h-14 w-[2px] bg-gray-200"></div>
+            <div className="h-11 w-[2px] bg-gray-200"></div>
             <div>
               <p className="text-black font-medium">Organization</p>
               <select className="outline-0 bg-transparent text-[#8B8B8B]">
@@ -82,7 +82,7 @@ function Navbar() {
                 <option >Fyza</option>
               </select>
             </div>
-            <div className="h-14 w-[2px] bg-gray-200"></div>
+            <div className="h-11 w-[2px] bg-gray-200"></div>
             <div>
               <p className="text-black font-medium">Type of activity</p>
               <select className="outline-0 bg-transparent text-[#8B8B8B]">
@@ -92,7 +92,7 @@ function Navbar() {
                 <option >Ghana</option>
               </select>
             </div>
-            <div className="h-14 w-[2px] bg-gray-200"></div>
+            <div className="h-11 w-[2px] bg-gray-200"></div>
             <div>
               <p className="text-black font-medium">Activity name</p>
               <input className="outline-0 bg-transparent text-[#8B8B8B]" type="text" placeholder="Enter activity name"/>

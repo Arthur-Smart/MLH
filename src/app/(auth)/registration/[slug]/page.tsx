@@ -130,7 +130,7 @@ export default function Home() {
                   value="Access Activity"
                 />
               </DialogTrigger>
-              <DialogContent className=" md:min-w-[850px] overflow-y-scroll h-[550px] no-scrollbar">
+              <DialogContent className=" md:min-w-[850px] overflow-y-scroll h-[500px] no-scrollbar">
                 <DialogHeader>
                   <DialogTitle className="text-xl text-start mt-7 font-semibold">
                     Register for the activity
