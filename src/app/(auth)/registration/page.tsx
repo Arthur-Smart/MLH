@@ -46,7 +46,7 @@ export default function Home() {
           className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
         >
           <div className="flex flex-col text-center">
-            <h1 className="font-bold text-2xl md:text-4xl text-white">
+            <h1 className="font-bold text-xl md:text-4xl text-white">
               Avenue Hospital Event
             </h1>
             <p className="text-white text-md md:text-xl">
@@ -93,16 +93,15 @@ export default function Home() {
           {/* Email input field */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="email_form flex mt-9"
+            className={`${styles.email_form} flex mt-9`}
           >
+              <Dialog>
             <input
               {...register("email", {
                 required: true,
-                validate: (value) => {
-                  if (!value.includes("@")) {
-                    return "This is not a valid email";
-                  }
-                  return true;
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "This is not a valid email",
                 },
               })}
               type="email"
@@ -113,16 +112,16 @@ export default function Home() {
                   : "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px]"
               }
             />
-            <Dialog>
+          
               <DialogTrigger>
                 <input
                   disabled={!isDirty || !isValid}
-                  className="email_btn py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74]"
+                  className={`${styles.email_btn}  py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74] cursor-pointer`}
                   type="submit"
                   value="Access Activity"
                 />
               </DialogTrigger>
-              <DialogContent className=" md:min-w-[800px] overflow-y-scroll h-[500px] no-scrollbar">
+              <DialogContent className=" md:min-w-[800px] overflow-y-scroll h-[550px] no-scrollbar">
                 <DialogHeader>
                   <DialogTitle className="text-xl text-start mt-7 font-semibold">
                     Register for the activity

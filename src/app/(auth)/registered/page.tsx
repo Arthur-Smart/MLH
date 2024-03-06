@@ -5,10 +5,12 @@ import FLYER from "../../../../public/flyer.svg";
 import THUMB from "../../../../public/thumb.svg";
 import CALENDAR from "../../../../public/calendar.svg";
 import CLOCK from "../../../../public/time.svg";
+import EventDetails from "@/globals/eventdetails/EventDetails";
 
 const page = () => {
   return (
-    <main className={`${styles.success} w-screen flex`}>
+    <main className="w-screen flex flex-col">
+      <section className={`${styles.success} w-[100%] flex`}>
       <div
         className={`${styles.success_container} px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
       >
@@ -80,6 +82,12 @@ const page = () => {
           />
         </div>
       </div>
+      </section>
+      
+      {/* Activity Details */}
+      <section className="container flex flex-col py-10">
+        <EventDetails />
+      </section>
     </main>
   );
 };

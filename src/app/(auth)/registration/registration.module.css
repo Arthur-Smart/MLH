@@ -15,7 +15,9 @@ background-color: #aaa2c4c3
 
 .email_btn:disabled{
 cursor:not-allowed;
+background-color: #aaa2c4a2;
 }
+
 
 
 
