@@ -43,10 +43,10 @@ function Navbar() {
             className="cursor-pointer"
           />
           <div className={`${styles.links} flex items-center ml-5`}>
-            <p className="font-medium text-lg hover:text-[#3E2C78] cursor-pointer">
+            <p className="font-medium text-base hover:text-[#3E2C78] cursor-pointer">
               News
             </p>
-            <p className="font-medium text-lg hover:text-[#3E2C78] ml-5 cursor-pointer">
+            <p className="font-medium text-base hover:text-[#3E2C78] ml-5 cursor-pointer">
               About
             </p>
           </div>
@@ -55,15 +55,15 @@ function Navbar() {
         <div
           className={`${styles.nav_right} flex items-center justify-between`}
         >
-          <button className="bg-[#D91F4F] hover:bg-[#D04367] py-2 px-3 text-white rounded-[4px] font-medium text-lg">
+          <button className="bg-[#D91F4F] hover:bg-[#D04367] py-2 px-3 text-white rounded-[4px] font-medium text-base">
             Event Organizer
           </button>
-          <h1 className="ml-4 font-medium text-lg hover:text-[#3E2C78] cursor-pointer">
+          <h1 className="ml-4 font-medium text-base hover:text-[#3E2C78] cursor-pointer">
             Sign up/Join
           </h1>
           <Popover>
             <PopoverTrigger>
-              <h3 className="ml-6 font-medium text-lg hover:text-[#3E2C78] ">
+              <h3 className="ml-6 font-medium text-base hover:text-[#3E2C78] ">
                 {selectedLanguage}
               </h3>
             </PopoverTrigger>
