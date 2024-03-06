@@ -17,15 +17,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import EventDetails from "@/globals/eventdetails/EventDetails";
+import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
+import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
 
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isEmail, setIsEmail] = useState(false);
 
-  const filterStaffsRef = useRef<HTMLDivElement>(null);
-  const formsRef = useRef<HTMLDivElement>(null);
 
-  const handleRadioChange = (option: any) => {
+  const handleOptionChange = (option:any) => {
     setSelectedOption(option);
   };
 
@@ -122,12 +122,45 @@ export default function Home() {
                   value="Access Activity"
                 />
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="md:min-w-[800px]">
                 <DialogHeader>
-                  <DialogTitle>Register for the activity</DialogTitle>
+                  <DialogTitle className="text-xl mt-7 font-semibold">
+                    Register for the activity
+                  </DialogTitle>
                   <DialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
+                    <p className="text-lg text-black font-medium">
+                      Type of staff
+                    </p>
+                    <div className="w-full flex items-center justify-between mt-3">
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          checked={selectedOption === "fulltime"}
+                          onChange={() => handleOptionChange("fulltime")}
+                        />
+                        <p className="ml-2 text-base">Fulltime Avenue Staff</p>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          checked={selectedOption === "locum"}
+                          onChange={() => handleOptionChange("locum")}
+                        />
+                        <p className="ml-2 text-base">Locum Avenue Staff</p>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          checked={selectedOption === "external"}
+                          onChange={() => handleOptionChange("external")}
+                        />
+                        <p className="ml-2 text-base">External/Visitor</p>
+                      </div>
+                    </div>
+                    <div className="w-full mt-3 flex flex-wrap">
+                      <FulltimeForm/>
+                      {/* <VisitorsForm/> */}
+                    </div>
                   </DialogDescription>
                 </DialogHeader>
               </DialogContent>
@@ -153,7 +186,7 @@ export default function Home() {
 
       {/* Activity Details */}
       <section className="container flex flex-col py-10">
-       <EventDetails/>
+        <EventDetails />
       </section>
     </main>
   );

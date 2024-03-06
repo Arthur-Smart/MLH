@@ -50,7 +50,29 @@ const EventDetails = () => {
 
       {/* Overview | Agenda | Prerequisite Details */}
       <div className="flex flex-col mt-7">
-        <div className="mb-2">
+        <div className="mb-4">
+          <h1 className="text-[#333333] font-semibold text-lg">Overview one</h1>
+          <p className="text-[#333333]">
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years old. Richard McClintock, a Latin professor
+            at Hampden-Sydney College in Virginia, looked up one of the more
+            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+            going through the cites of the word in classical literature
+          </p>
+        </div>
+        <div className="mb-4">
+          <h1 className="text-[#333333] font-semibold text-lg">Overview one</h1>
+          <p className="text-[#333333]">
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years old. Richard McClintock, a Latin professor
+            at Hampden-Sydney College in Virginia, looked up one of the more
+            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+            going through the cites of the word in classical literature
+          </p>
+        </div>
+        <div className="mb-4">
           <h1 className="text-[#333333] font-semibold text-lg">Overview one</h1>
           <p className="text-[#333333]">
             Contrary to popular belief, Lorem Ipsum is not simply random text.

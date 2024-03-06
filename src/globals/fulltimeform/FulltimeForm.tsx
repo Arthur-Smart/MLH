@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { Inputs } from "@/interface/FormInterface";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -13,25 +13,24 @@ const FulltimeForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await  new Promise((resolve) => setTimeout(resolve, 2500));
-  
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+
     console.log(data);
-    router.push("/success")
-  }
+    router.push("/success");
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col py-4"
-    >
+   
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
       <div className="w-full flex flex-col md:flex-row items-center gap-2">
-        <div className="w-full md:w-[50%] flex flex-col">
+        <div className="w-full md:w-[33.33%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Email <span className="text-red-700">*</span>
           </label>
           <input
             defaultValue="johndoe@gmail.com"
-            {...register("email", {required:true})} readOnly
+            {...register("email", { required: true })}
+            readOnly
             className={
               errors.email
                 ? "w-full border-[#ED0000]] border-[1px] rounded-md py-2 px-3 outline-0"
@@ -40,7 +39,7 @@ const FulltimeForm = () => {
             placeholder="Enter email"
           />
         </div>
-        <div className="w-full md:w-[50%]flex flex-col">
+        <div className="w-full md:w-[33.33%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             First name <span className="text-red-700">*</span>
           </label>
@@ -56,7 +55,7 @@ const FulltimeForm = () => {
             placeholder="Enter first name"
           />
         </div>
-        <div className="w-full md:w-[50%] flex flex-col">
+        <div className="w-full md:w-[33.33%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Last name <span className="text-red-700">*</span>
           </label>
@@ -69,11 +68,10 @@ const FulltimeForm = () => {
             }
             placeholder="Enter lastname"
           />
-         
         </div>
       </div>
-      <div className="w-full flex flex-col md:flex-row  items-center gap-2 mt-3">
-        <div className="w-full md:w-[50%]  flex flex-col">
+      <div className="w-full flex flex-col md:flex-row items-center gap-2">
+        <div className="w-full md:w-[50%]  flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Gender<span className="text-red-700">*</span>
           </label>
@@ -85,7 +83,7 @@ const FulltimeForm = () => {
             <option value="male">Male</option>
           </select>
         </div>
-        <div className="w-full md:w-[50%]  flex flex-col">
+        <div className="w-full md:w-[50%]  flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Profession <span className="text-red-700">*</span>
           </label>
@@ -99,8 +97,8 @@ const FulltimeForm = () => {
           </select>
         </div>
       </div>
-      <div className="w-full  flex flex-col md:flex-row items-center gap-2 mt-3">
-        <div className="w-full md:w-[50%] flex flex-col">
+      <div className="w-full flex flex-col md:flex-row items-center gap-2">
+      <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Medical Board NUmber(KMPD, NCK, COC, PPB){" "}
             <span className="text-red-700">*</span>
@@ -114,9 +112,8 @@ const FulltimeForm = () => {
             }
             placeholder="Enter board number"
           />
-          {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
-        <div className="w-full md:w-[50%]flex flex-col">
+        <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Ward/Unit <span className="text-red-700">*</span>
           </label>
@@ -134,8 +131,8 @@ const FulltimeForm = () => {
           </select>
         </div>
       </div>
-      <div className="w-full flex flex-col md:flex-row  items-center gap-2 mt-3">
-        <div className="w-full md:w-[50%] flex flex-col">
+      <div className="w-full flex flex-col md:flex-row items-center gap-2">
+      <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Name of Avenue Hospital/Clinic/Office
             <span className="text-red-700">*</span>
@@ -150,7 +147,7 @@ const FulltimeForm = () => {
           </select>
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
-        <div className="w-full md:w-[50%] flex flex-col">
+        <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Department <span className="text-red-700">*</span>
           </label>
@@ -165,13 +162,12 @@ const FulltimeForm = () => {
         </div>
       </div>
       {errors.boardNumber || errors.firstname ||errors.lastname  ? (
-        <p className="text-[#ED0000]">Please fill all the input fields</p>
+        <p className="text-[#ED0000] mt-2">Please fill all the input fields</p>
       ) : ("")}
-
-      <button
+         <button
         disabled={isSubmitting}
         type="submit"
-        className="py-3 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2"
+        className="mt-4 py-3 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2"
       >
         {isSubmitting ? "Submitting..." : "Register"}
         </button>
