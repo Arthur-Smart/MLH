@@ -6,3 +6,25 @@
     z-index:999;
     background-color: #fff;
 }
+
+.humburger__menu{
+    display: none;
+}
+
+@media screen and (max-width:1240px){
+    .links{
+        display: none;
+    }
+
+    .nav_center{
+        display: none;
+    }
+
+    .nav_right{
+        display: none;
+    }
+
+    .humburger__menu{
+        display: flex;
+    }
+}

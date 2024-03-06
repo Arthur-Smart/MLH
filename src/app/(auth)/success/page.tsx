@@ -64,6 +64,7 @@ const page = () => {
             <p className="text-white">Secs</p>
           </div>
         </div>
+        
       </div>
       <div className={`${styles.flyer_container} w-[50%] h-[90vh] overflow-hidden`}>
         <div className="h-[100%]">

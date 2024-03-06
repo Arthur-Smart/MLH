@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import LOGO from "../../../public/logo.svg";
+import HUMBURGER_ICON from "../../../public/menu.svg"
 import {
   Popover,
   PopoverContent,
@@ -10,7 +11,7 @@ import {
 
 function Navbar() {
   return (
-    <nav className={`${styles.nav} w-screen flex items-center justify-center`}>
+    <nav className={`${styles.nav} w-screen flex items-center justify-center px-5`}>
       <div className="container flex items-center justify-between p-2">
         <div className={`${styles.nav_left} flex`}>
           <Image
@@ -20,7 +21,7 @@ function Navbar() {
             width={80}
             className="cursor-pointer"
           />
-          <div className="flex items-center ml-5">
+          <div className={`${styles.links} flex items-center ml-5`}>
             <p className="font-medium text-lg hover:text-[#3E2C78] cursor-pointer">News</p>
             <p className="font-medium text-lg hover:text-[#3E2C78] ml-5 cursor-pointer">About</p>
           </div>
@@ -42,6 +43,9 @@ function Navbar() {
              <p className="text-lg mt-2 cursor-pointer hover:text-[#3E2C78]">French[Fr]</p>
             </PopoverContent>
           </Popover>
+        </div>
+        <div className={styles.humburger__menu}>
+          <Image src={HUMBURGER_ICON} alt="MLH Humburger Icon" width={25} height={25} className="mr-2"/>
         </div>
       </div>
     </nav>

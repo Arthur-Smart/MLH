@@ -6,23 +6,23 @@
 
 /* Media query */
 @media screen and (max-width:830px){
-    .success{
+    .ongoing{
         flex-direction: column;
     }
     .flyer_container{
        display: none;
     }
 
-    .success_container{
+    .ongoing_container{
         width:100%;
     }
 
-    .success_message{
+    .ongoing_message{
         align-items: center;
         justify-content: center;
     }
 
-    .success_message h1{
+    .ongoing_message h1{
         text-align: center;
     }
 }
