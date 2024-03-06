@@ -62,6 +62,7 @@ const EventDetails = () => {
       <div className="flex items-center gap-10 mt-7 overflow-y-hidden no-scrollbar">
         {buttons.map((button) => (
           <button
+          key={button.id}
             onClick={() => setSelected(button.id)}
             className={
               button.id == selected
