@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import LOGO from "../../../public/logo.svg";
+import SEARCH_ICON from "../../../public/search.svg"
 import HUMBURGER_ICON from "../../../public/menu.svg";
 import {
   Popover,
@@ -31,10 +32,10 @@ function Navbar() {
 
   return (
     <nav
-      className={`${styles.nav} w-screen flex items-center justify-center px-5`}
+      className={`${styles.nav} w-screen flex items-center justify-center px-5 shadow-md`}
     >
-      <div className="container flex items-center justify-between p-2">
-        <div className={`${styles.nav_left} flex`}>
+      <div className="container flex items-center justify-between p-2 gap-2">
+        <div className={`${styles.nav_left} flex w-[25%]`}>
           <Image
             src={LOGO}
             alt="Medical Learning Hub"
@@ -51,9 +52,61 @@ function Navbar() {
             </p>
           </div>
         </div>
-        <div className={`${styles.nav_center}`}></div>
+        <div className={`${styles.nav_center} w-[45%] flex items-center justify-center`}>
+          <Popover>
+          <PopoverTrigger>
+          <div className="rounded-full py-2 px-4 shadow-lg hover:shadow-xl flex items-center gap-2 cursor-pointer">
+          <p className="text-gray-400">Quick search</p>
+          <div className="bg-[#D91F4F] p-2 rounded-full">
+            <Image src={SEARCH_ICON} alt="" width={20} height={20}/>
+          </div>
+          </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-[80vw] rounded-full mt-2 border-[1px] border-gray-200 flex items-center justify-between">
+            <div>
+              <p className="text-black font-medium">County</p>
+              <select className="outline-0 bg-transparent text-[#8B8B8B]">
+                <option >Where is the event hosted?</option>
+                <option >Kenya</option>
+                <option >Tanzania</option>
+                <option >Ghana</option>
+              </select>
+            </div>
+            <div className="h-14 w-[2px] bg-gray-200"></div>
+            <div>
+              <p className="text-black font-medium">Organization</p>
+              <select className="outline-0 bg-transparent text-[#8B8B8B]">
+                <option >Select organization</option>
+                <option >Avenue HOspital</option>
+                <option >Equity Afya</option>
+                <option >Fyza</option>
+              </select>
+            </div>
+            <div className="h-14 w-[2px] bg-gray-200"></div>
+            <div>
+              <p className="text-black font-medium">Type of activity</p>
+              <select className="outline-0 bg-transparent text-[#8B8B8B]">
+                <option >Select activity type</option>
+                <option >Kenya</option>
+                <option >Tanzania</option>
+                <option >Ghana</option>
+              </select>
+            </div>
+            <div className="h-14 w-[2px] bg-gray-200"></div>
+            <div>
+              <p className="text-black font-medium">Activity name</p>
+              <input className="outline-0 bg-transparent text-[#8B8B8B]" type="text" placeholder="Enter activity name"/>
+              
+            </div>
+            <div className="p-3 rounded-full bg-[#D91F4F] cursor-pointer">
+            <Image src={SEARCH_ICON} alt="" width={20} height={20}/>
+            </div>
+          </PopoverContent>
+          </Popover>
+          
+        </div>
         <div
-          className={`${styles.nav_right} flex items-center justify-between`}
+          className={`${styles.nav_right} flex items-center justify-between w-[30%]`}
         >
           <button className="bg-[#D91F4F] hover:bg-[#D04367] py-2 px-3 text-white rounded-[4px] font-medium text-base">
             Event Organizer
