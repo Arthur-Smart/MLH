@@ -1,8 +1,10 @@
-import React from "react";
+"use client"
+
+import React, { useState } from "react";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import LOGO from "../../../public/logo.svg";
-import HUMBURGER_ICON from "../../../public/menu.svg"
+import HUMBURGER_ICON from "../../../public/menu.svg";
 import {
   Popover,
   PopoverContent,
@@ -10,8 +12,27 @@ import {
 } from "@/components/ui/popover";
 
 function Navbar() {
+  const [selectedLanguage, setSelectedLanguage] = useState("English")
+  type LangType = {
+    id: number;
+    title: string;
+  };
+
+  const languages: LangType[] = [
+    {
+      id: 1,
+      title: "English",
+    },
+    {
+      id: 2,
+      title: "French",
+    },
+  ];
+
   return (
-    <nav className={`${styles.nav} w-screen flex items-center justify-center px-5`}>
+    <nav
+      className={`${styles.nav} w-screen flex items-center justify-center px-5`}
+    >
       <div className="container flex items-center justify-between p-2">
         <div className={`${styles.nav_left} flex`}>
           <Image
@@ -22,8 +43,12 @@ function Navbar() {
             className="cursor-pointer"
           />
           <div className={`${styles.links} flex items-center ml-5`}>
-            <p className="font-medium text-lg hover:text-[#3E2C78] cursor-pointer">News</p>
-            <p className="font-medium text-lg hover:text-[#3E2C78] ml-5 cursor-pointer">About</p>
+            <p className="font-medium text-lg hover:text-[#3E2C78] cursor-pointer">
+              News
+            </p>
+            <p className="font-medium text-lg hover:text-[#3E2C78] ml-5 cursor-pointer">
+              About
+            </p>
           </div>
         </div>
         <div className={`${styles.nav_center}`}></div>
@@ -33,19 +58,32 @@ function Navbar() {
           <button className="bg-[#D91F4F] hover:bg-[#D04367] py-2 px-3 text-white rounded-[4px] font-medium text-lg">
             Event Organizer
           </button>
-          <h1 className="ml-4 font-medium text-lg hover:text-[#3E2C78] cursor-pointer">Sign up/Join</h1>
+          <h1 className="ml-4 font-medium text-lg hover:text-[#3E2C78] cursor-pointer">
+            Sign up/Join
+          </h1>
           <Popover>
             <PopoverTrigger>
-              <h3 className="ml-6 font-medium text-lg hover:text-[#3E2C78] ">English</h3>
+              <h3 className="ml-6 font-medium text-lg hover:text-[#3E2C78] ">
+                {selectedLanguage}
+              </h3>
             </PopoverTrigger>
             <PopoverContent className="mt-2 w-[150px] flex flex-col items-center justify-center">
-             <p className="text-lg cursor-pointer hover:text-[#3E2C78]">English[En]</p>
-             <p className="text-lg mt-2 cursor-pointer hover:text-[#3E2C78]">French[Fr]</p>
+              {languages.map((language) => (
+                <p onClick={() => setSelectedLanguage(language.title)} className="text-lg cursor-pointer hover:text-[#3E2C78]">
+                  {language.title}
+                </p>
+              ))}
             </PopoverContent>
           </Popover>
         </div>
         <div className={styles.humburger__menu}>
-          <Image src={HUMBURGER_ICON} alt="MLH Humburger Icon" width={25} height={25} className="mr-2"/>
+          <Image
+            src={HUMBURGER_ICON}
+            alt="MLH Humburger Icon"
+            width={25}
+            height={25}
+            className="mr-2"
+          />
         </div>
       </div>
     </nav>

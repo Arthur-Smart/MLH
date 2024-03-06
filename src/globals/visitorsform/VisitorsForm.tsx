@@ -170,7 +170,7 @@ const VisitorsForm = () => {
        <button
         disabled={isSubmitting}
         type="submit"
-        className="py-3 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2"
+        className="py-3 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2 font-medium"
       >
         {isSubmitting ? "Submitting..." : "Register"}
         </button>
