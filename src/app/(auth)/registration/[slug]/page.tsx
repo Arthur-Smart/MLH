@@ -236,7 +236,7 @@ export default function Home() {
                     checked={selectedOption === "fulltime"}
                     onChange={() => handleOptionChange("fulltime")}
                   />
-                  <p className="ml-2 text-[15px] text-black">
+                  <p className="ml-2 text-[16px] text-black">
                     Fulltime Avenue Staff
                   </p>
                 </div>
@@ -246,7 +246,7 @@ export default function Home() {
                     checked={selectedOption === "locum"}
                     onChange={() => handleOptionChange("locum")}
                   />
-                  <p className="ml-2 text-[15px] text-black">
+                  <p className="ml-2 text-[16px] text-black">
                     Locum Avenue Staff
                   </p>
                 </div>
@@ -256,7 +256,7 @@ export default function Home() {
                     checked={selectedOption === "external"}
                     onChange={() => handleOptionChange("external")}
                   />
-                  <p className="ml-2 text-[15px] text-black">
+                  <p className="ml-2 text-[16px] text-black">
                     External/Visitor
                   </p>
                 </div>
