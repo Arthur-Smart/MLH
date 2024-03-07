@@ -66,8 +66,8 @@ const EventDetails = () => {
             onClick={() => setSelected(button.id)}
             className={
               button.id == selected
-                ? "bg-[#D9D9D9] py-2 px-6 text-[#2C2C74] font-medium rounded"
-                : "border-[#D9D9D9] border-[1px] rounded py-2 px-6"
+                ? "bg-[#D9D9D9] py-[5px] px-6 text-[#2C2C74] font-medium rounded"
+                : "border-[#D9D9D9] border-[1px] rounded py-[5px] px-6"
             }
           >
             {button.title}

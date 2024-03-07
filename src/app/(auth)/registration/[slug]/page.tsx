@@ -5,17 +5,11 @@ import Image from "next/image";
 import CALENDAR from "../../../../../public/calendar.svg";
 import CLOCK from "../../../../../public/time.svg";
 import FLYER from "../../../../../public/flyer.svg";
+import CLOSE_ICON from "../../../../../public/close.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IEmail } from "@/interface/FormInterface";
 import styles from "./registration.module.css";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 import EventDetails from "@/globals/eventdetails/EventDetails";
 import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
 import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
@@ -23,13 +17,14 @@ import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isEmail, setIsEmail] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
   const scrollToActivityDetails = () => {
     if (ActivityDetailRef.current) {
       ActivityDetailRef?.current.scrollIntoView({
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -46,10 +41,11 @@ export default function Home() {
   const onSubmit: SubmitHandler<IEmail> = (data) => {
     console.log(data);
     setIsEmail(true);
+    setShowModal(true);
   };
 
   return (
-    <main className="main">
+    <main className={styles.main}>
       <section className={`${styles.registration} w-[100%] h-full flex`}>
         <div
           className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
@@ -100,11 +96,35 @@ export default function Home() {
           </div>
 
           {/* Email input field */}
+          <div className="flex"></div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className={`${styles.email_form} flex mt-9`}
           >
-            <Dialog>
+            <input
+              {...register("email", {
+                required: true,
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "This is not a valid email",
+                },
+              })}
+              type="email"
+              placeholder="Enter your email"
+              className={
+                errors.email
+                  ? "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px] border-[1px] border-[red]"
+                  : "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px]"
+              }
+            />
+            <input
+              disabled={!isDirty || !isValid}
+              className={`${styles.email_btn}  py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74] cursor-pointer`}
+              type="submit"
+              value="Access Activity"
+            />
+
+            {/* <Dialog>
               <input
                 {...register("email", {
                   required: true,
@@ -173,13 +193,86 @@ export default function Home() {
                   </DialogDescription>
                 </DialogHeader>
               </DialogContent>
-            </Dialog>
+            </Dialog> */}
           </form>
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
           )}
 
-          <div onClick={scrollToActivityDetails} className="animate-bounce w-14 h-14 mt-11 cursor-pointer bg-[#AAA2C4] rounded-full flex items-center justify-center">
+          {/*Form Dialog */}
+          <section
+            className={
+              showModal
+                ? ` ${styles.dialog} ${styles.show} flex items-center justify-center`
+                : ` ${styles.dialog} flex items-center justify-center`
+            }
+          >
+            <div
+              className={
+                selectedOption == null
+                  ? `${styles.radio_height} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-2`
+                  : `${styles.forms_container} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-2`
+              }
+            >
+              <div className="w-full flex items-center justify-between">
+                <p className="text-lg text-start mt-7 font-semibold">
+                  Register for the activity
+                </p>
+                <div
+                  onClick={() => setShowModal(false)}
+                  className="cursor-pointer h-7 w-7 flex items-center justify-center rounded-full bg-black/20"
+                >
+                  <Image src={CLOSE_ICON} alt="" width={12} height={12} />
+                </div>
+              </div>
+              <p className="text-lg text-start text-black">
+                Type of staff
+              </p>
+
+              <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-3">
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    checked={selectedOption === "fulltime"}
+                    onChange={() => handleOptionChange("fulltime")}
+                  />
+                  <p className="ml-2 text-[15px] text-black">
+                    Fulltime Avenue Staff
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    checked={selectedOption === "locum"}
+                    onChange={() => handleOptionChange("locum")}
+                  />
+                  <p className="ml-2 text-[15px] text-black">
+                    Locum Avenue Staff
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    checked={selectedOption === "external"}
+                    onChange={() => handleOptionChange("external")}
+                  />
+                  <p className="ml-2 text-[15px] text-black">
+                    External/Visitor
+                  </p>
+                </div>
+              </div>
+              <div className="w-full  flex flex-wrap">
+                {selectedOption == "fulltime" && <FulltimeForm />}
+                {selectedOption == "locum" && <FulltimeForm />}
+                {selectedOption == "external" && <VisitorsForm />}
+              </div>
+            </div>
+          </section>
+
+          <div
+            onClick={scrollToActivityDetails}
+            className="animate-bounce w-14 h-14 mt-11 cursor-pointer bg-[#AAA2C4] rounded-full flex items-center justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -213,7 +306,10 @@ export default function Home() {
       </section>
 
       {/* Activity Details */}
-      <section ref={ActivityDetailRef} className="container flex flex-col py-10">
+      <section
+        ref={ActivityDetailRef}
+        className="container flex flex-col py-10"
+      >
         <EventDetails />
       </section>
     </main>

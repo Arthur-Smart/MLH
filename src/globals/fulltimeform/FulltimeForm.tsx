@@ -33,8 +33,8 @@ const FulltimeForm = () => {
             readOnly
             className={
               errors.email
-                ? "w-full border-[#ED0000]] border-[1px] rounded-md py-2 px-3 outline-0"
-                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+                ? "w-full border-[#ED0000]] border-[1px] rounded-md py-[7px] px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
             }
             placeholder="Enter email"
           />
@@ -49,8 +49,8 @@ const FulltimeForm = () => {
             })}
             className={
               errors.firstname
-                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
-                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
             placeholder="Enter first name"
           />
@@ -63,8 +63,8 @@ const FulltimeForm = () => {
             {...register("lastname", { required: true })}
             className={
               errors.lastname
-                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
-                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
             placeholder="Enter lastname"
           />
@@ -77,7 +77,7 @@ const FulltimeForm = () => {
           </label>
           <select
             {...register("gender")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
             <option value="female">Female</option>
             <option value="male">Male</option>
@@ -89,7 +89,7 @@ const FulltimeForm = () => {
           </label>
           <select
             {...register("profession")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
             <option value="medical">Medical Doctor</option>
             <option value="it">IT</option>
@@ -107,8 +107,8 @@ const FulltimeForm = () => {
             {...register("boardNumber", { required: true })}
             className={
               errors.boardNumber
-                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
-                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
             placeholder="Enter board number"
           />
@@ -121,8 +121,8 @@ const FulltimeForm = () => {
             {...register("unit")}
             className={
               errors.unit
-                ? "w-full border-[#ED0000] border-[1px] rounded-md py-2 px-3 outline-0"
-                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
           >
             <option value="medical">Medical Doctor</option>
@@ -139,7 +139,7 @@ const FulltimeForm = () => {
           </label>
           <select
             {...register("name")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
             <option value="kisumu">Kisumu</option>
             <option value="thika">Thika</option>
@@ -153,7 +153,7 @@ const FulltimeForm = () => {
           </label>
           <select
             {...register("department")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-2 px-3 outline-0"
+            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
             <option value="medical">Medical Doctor</option>
             <option value="it">IT</option>
@@ -162,14 +162,14 @@ const FulltimeForm = () => {
         </div>
       </div>
       <div className="w-full flex flex-col mt-3">
-        <p className="text-[#666666] text-base ">By submitting this information, one is allowing MLH to share this date with the activity for all instances provider</p>
+        <p className="text-[#666666] text-[15px] ">By submitting this information, one is allowing MLH to share this date with the activity for all instances provider</p>
         <div className="flex items-center mt-2">
         <input type="checkbox" {...register("skip")}/>
-        <p className="text-black ml-2 text-[16px]">What to skip re-entering registration info for this organizer's activities. Check this.</p>
+        <p className="text-black ml-2 text-[15px]">What to skip re-entering registration info for this organizer's activities. Check this.</p>
         </div>   
         <div className="flex items-center mt-3">
         <input type="checkbox" {...register("terms", {required:true})}/>
-        <p className={errors.terms ? "text-[#ED0000] ml-2 text-[16px]" : "text-black ml-2 text-[16px]"}>To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
+        <p className={errors.terms ? "text-[#ED0000] ml-2 text-[15px]" : "text-black ml-2 text-[15px]"}>To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
         </div>  
       </div>
       {errors.boardNumber || errors.firstname || errors.lastname ||errors.name ? (
