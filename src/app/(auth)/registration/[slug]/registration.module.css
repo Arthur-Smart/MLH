@@ -56,6 +56,10 @@ background-color: #aaa2c4a2;
     .forms_container{
         width:95%;
     }
+
+    .radio_height{
+        width:95%;
+    }
 }
 @media screen and (max-width:830px){
     .registration{
