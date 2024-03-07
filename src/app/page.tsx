@@ -46,7 +46,7 @@ const page = () => {
           className="banner_image"
         />
       </section>
-      <section className="container flex items-start items-center mt-5">
+      {/* <section className="container flex items-start items-center mt-5">
         <h2 className="font-semibold text-lg">Browse activities</h2>
         <select className="ml-2 text-base bg-transparent outline-0 text-[#3E2C78] font-medium">
           <option value="all">All</option>
@@ -68,7 +68,8 @@ const page = () => {
             {btn.title}
           </button>
         ))}
-      </section>
+      </section> */}
+      <section className=""></section>
       <div className="w-screen h-screen flex items-center justify-center flex flex-col px-4">
         <p className="text-2xl text-center">
           Our Landing page is being developed 😊?
