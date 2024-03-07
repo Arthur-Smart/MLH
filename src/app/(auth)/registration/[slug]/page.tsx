@@ -210,43 +210,43 @@ export default function Home() {
             <div
               className={
                 selectedOption == null
-                  ? `${styles.radio_height} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-2`
-                  : `${styles.forms_container} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-2`
+                  ? `${styles.radio_height} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-3`
+                  : `${styles.forms_container} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-3`
               }
             >
               <div className="w-full flex items-center justify-between">
-                <p className="text-lg text-start mt-7 font-semibold">
+                <p className="text-lg text-start  font-semibold">
                   Register for the activity
                 </p>
                 <div
                   onClick={() => setShowModal(false)}
-                  className="cursor-pointer h-7 w-7 flex items-center justify-center rounded-full bg-black/20"
+                  className="cursor-pointer h-7 w-7 flex items-center justify-center rounded-full bg-black/20 hover:bg-black/30"
                 >
                   <Image src={CLOSE_ICON} alt="" width={12} height={12} />
                 </div>
               </div>
-              <p className="text-lg text-start text-black">
+              <p className="text-lg text-start text-black/70 mt-3">
                 Type of staff
               </p>
 
-              <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-3">
+              <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-[3px]">
                 <div className="flex items-center">
                   <input
                     type="radio"
                     checked={selectedOption === "fulltime"}
                     onChange={() => handleOptionChange("fulltime")}
                   />
-                  <p className="ml-2 text-[16px] text-black">
+                  <p className="ml-2 text-base text-black">
                     Fulltime Avenue Staff
                   </p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center mb-[2px]  md:mb-[0] text-[16px]">
                   <input
                     type="radio"
                     checked={selectedOption === "locum"}
                     onChange={() => handleOptionChange("locum")}
                   />
-                  <p className="ml-2 text-[16px] text-black">
+                  <p className="ml-2  text-black">
                     Locum Avenue Staff
                   </p>
                 </div>
