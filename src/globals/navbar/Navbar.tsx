@@ -44,9 +44,7 @@ function Navbar() {
             className="cursor-pointer"
           />
           <div className={`${styles.links} flex items-center ml-5`}>
-            <p className="font-medium text-base hover:text-[#3E2C78] cursor-pointer">
-              News
-            </p>
+            
             <p className="font-medium text-base hover:text-[#3E2C78] ml-5 cursor-pointer">
               About
             </p>

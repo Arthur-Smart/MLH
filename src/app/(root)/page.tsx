@@ -3,9 +3,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
-import BANNER from "../../public/banner.jpg";
+import BANNER from "../../../public/banner.jpg";
 
-const page = () => {
+const Home = () => {
   const [selected, setSelected] = useState(1);
 
   type ActivitiesType = {
@@ -88,4 +88,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Home;

@@ -18,6 +18,7 @@ export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isEmail, setIsEmail] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [contentLoaded, setContentLoaded] = useState(false);
 
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
@@ -42,6 +43,9 @@ export default function Home() {
     console.log(data);
     setIsEmail(true);
     setShowModal(true);
+    setTimeout(() => {
+      setContentLoaded(true);
+    }, 1500);
   };
 
   return (
@@ -207,66 +211,68 @@ export default function Home() {
                 : ` ${styles.dialog} flex items-center justify-center`
             }
           >
-            <div
-              className={
-                selectedOption == null
-                  ? `${styles.radio_height} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-3`
-                  : `${styles.forms_container} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-3 py-3`
-              }
-            >
-              <div className="w-full flex items-center justify-between">
-                <p className="text-lg text-start  font-semibold">
-                  Register for the activity
-                </p>
+            {contentLoaded && (
+              <>
                 <div
-                  onClick={() => setShowModal(false)}
-                  className="cursor-pointer h-7 w-7 flex items-center justify-center rounded-full bg-black/20 hover:bg-black/30"
+                  className={
+                    selectedOption == null
+                      ? `${styles.radio_height} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-5 py-3`
+                      : `${styles.forms_container} overflow-y-scroll no-scrollbar  bg-white rounded-md  px-5 py-3`
+                  }
                 >
-                  <Image src={CLOSE_ICON} alt="" width={12} height={12} />
-                </div>
-              </div>
-              <p className="text-lg text-start text-black/70 mt-3">
-                Type of staff
-              </p>
+                  <div className="w-full flex items-center justify-between">
+                    <p className="text-lg text-start  font-semibold">
+                      Register for the activity
+                    </p>
+                    <div
+                      onClick={() => setShowModal(false)}
+                      className="cursor-pointer h-7 w-7 flex items-center justify-center rounded-full bg-black/20 hover:bg-black/30"
+                    >
+                      <Image src={CLOSE_ICON} alt="" width={12} height={12} />
+                    </div>
+                  </div>
+                  <p className="text-lg text-start text-black/70 mt-3">
+                    Type of staff
+                  </p>
 
-              <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-[3px]">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    checked={selectedOption === "fulltime"}
-                    onChange={() => handleOptionChange("fulltime")}
-                  />
-                  <p className="ml-2 text-base text-black">
-                    Fulltime Avenue Staff
-                  </p>
+                  <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-[3px]">
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        checked={selectedOption === "fulltime"}
+                        onChange={() => handleOptionChange("fulltime")}
+                      />
+                      <p className="ml-2 text-base text-black">
+                        Fulltime Avenue Staff
+                      </p>
+                    </div>
+                    <div className="flex items-center mb-[2px]  md:mb-[0] text-[16px]">
+                      <input
+                        type="radio"
+                        checked={selectedOption === "locum"}
+                        onChange={() => handleOptionChange("locum")}
+                      />
+                      <p className="ml-2  text-black">Locum Avenue Staff</p>
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        checked={selectedOption === "external"}
+                        onChange={() => handleOptionChange("external")}
+                      />
+                      <p className="ml-2 text-[16px] text-black">
+                        External/Visitor
+                      </p>
+                    </div>
+                  </div>
+                  <div className="w-full  flex flex-wrap">
+                    {selectedOption == "fulltime" && <FulltimeForm />}
+                    {selectedOption == "locum" && <FulltimeForm />}
+                    {selectedOption == "external" && <VisitorsForm />}
+                  </div>
                 </div>
-                <div className="flex items-center mb-[2px]  md:mb-[0] text-[16px]">
-                  <input
-                    type="radio"
-                    checked={selectedOption === "locum"}
-                    onChange={() => handleOptionChange("locum")}
-                  />
-                  <p className="ml-2  text-black">
-                    Locum Avenue Staff
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    checked={selectedOption === "external"}
-                    onChange={() => handleOptionChange("external")}
-                  />
-                  <p className="ml-2 text-[16px] text-black">
-                    External/Visitor
-                  </p>
-                </div>
-              </div>
-              <div className="w-full  flex flex-wrap">
-                {selectedOption == "fulltime" && <FulltimeForm />}
-                {selectedOption == "locum" && <FulltimeForm />}
-                {selectedOption == "external" && <VisitorsForm />}
-              </div>
-            </div>
+              </>
+            )}
           </section>
 
           <div
