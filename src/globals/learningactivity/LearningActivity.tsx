@@ -1,9 +1,6 @@
 import React from "react";
 import styles from "./learningactivity.module.css";
 
-import Image from "next/image";
-import INSTITUTION_IMAGE from "../../../public/insight.jpg";
-
 const LearningActivity = () => {
   return (
     <div

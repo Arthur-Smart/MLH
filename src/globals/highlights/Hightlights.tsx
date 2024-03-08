@@ -13,7 +13,7 @@ const Highlights = () => {
       <Highlight/>
       <Highlight/>
       </div>
-        <button className="mt-4 bg-[#3E2C78] rounded-full text-white py-2 px-4 text-[15px] w-[fit-content] self-center">Load more</button>
+        <button className="mt-4 bg-[#3E2C78] hover:bg-[#3E2C78]/90  rounded-full text-white py-2 px-4 text-[15px] w-[fit-content] self-center">Load more</button>
     </main>
   )
 }

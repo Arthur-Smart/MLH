@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import styles from "./institution.module.css";
 import Image from "next/image";
 import SEARCH_ICON from "../../../../../public/search.svg";
+import ORG_BANNER from "../../../../../public/org-banner.jpg";
+import LearningActivities from "@/globals/learningactivities/LearningActivities";
 import Highlights from "@/globals/highlights/Hightlights";
 
 const page = () => {
@@ -27,9 +29,14 @@ const page = () => {
 
   return (
     <main className="w-full flex flex-col items-center justify-center py-3">
-      <section className="container rounded h-[350px] bg-black/50 flex items-center justify-center">
-        {/* <Image src="" alt="Avenue Banner" width={2000} height={700} className={styles.organization_banner}/> */}
-        <p className="text-xl font-medium">Organization Banner Goes here</p>
+      <section className="container rounded h-[350px] flex items-center justify-center">
+        <Image
+          src={ORG_BANNER}
+          alt="Avenue Banner"
+          width={2000}
+          height={700}
+          className={styles.organization_banner}
+        />
       </section>
       <section className="container mt-3">
         <h2 className="text-lg font-medium">About</h2>
@@ -73,7 +80,7 @@ const page = () => {
         <div className="flex items-center gap-3 mt-5">
           {buttons.map((button) => (
             <button
-            onClick={() => setSelected(button.id)}
+              onClick={() => setSelected(button.id)}
               className={
                 selected == button.id
                   ? "py-2 px-3 bg-[#3E2C78] rounded-full text-[15px] text-white"
@@ -88,7 +95,8 @@ const page = () => {
 
         {/* Highlight & Learning Section */}
         <div className="w-full mt-5">
-          <Highlights/>
+          {/* <Highlights/> */}
+          {selected == 1 ? <Highlights /> : <LearningActivities />}
         </div>
       </section>
     </main>
