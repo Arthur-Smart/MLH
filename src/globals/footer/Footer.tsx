@@ -22,7 +22,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full flex flex-col items-center justify-center bg-[#3E2C78] p-6">
-      <div className="container grid grid-cols-4 gap-6">
+      <div className="container grid grid-cols-1 md:grid-cols-4 gap-6">
         <div>
           <Image
             src={LOGO}
@@ -85,9 +85,9 @@ const Footer = () => {
         </div>
       </div>
       <div className="container h-[1px] my-5 bg-gray-200"></div>
-      <div className="container flex item-center justify-between">
+      <div className="container flex flex-col md:flex-row items-center justify-center md:justify-between">
         <p className="text-white text-[15px]">&copy;2024. Copyright. All rights reserved</p>
-        <div className="flex items-center gap-3">
+        <div className="flex mt-2 md:mt-0 items-center gap-3">
           <Link href="#">
             <Image src={LINKEDIN} alt="" width={17} height={17}/>
           </Link>

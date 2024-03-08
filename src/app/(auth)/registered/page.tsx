@@ -9,7 +9,7 @@ import EventDetails from "@/globals/eventdetails/EventDetails";
 
 const page = () => {
   return (
-    <main className="w-screen flex flex-col">
+    <main className={`${styles.main} w-screen flex flex-col`}>
       <section className={`${styles.success} w-[100%] h-[80vh] flex`}>
       <div
         className={`${styles.success_container} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
@@ -85,7 +85,7 @@ const page = () => {
       </section>
       
       {/* Activity Details */}
-      <section className="container flex flex-col py-10">
+      <section className="container flex flex-col py-7">
         <EventDetails />
       </section>
     </main>
