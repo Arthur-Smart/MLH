@@ -9,7 +9,7 @@ const page = () => {
     <main className="w-screen flex flex-col">
       <div className={`${styles.ongoing} w-[100%] flex`}>
         <div
-          className={`${styles.ongoing_container} px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] `}
+          className={`${styles.ongoing_container} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] `}
         >
           <div className={`${styles.ongoing_message} flex flex-col `}>
             <h1 className="text-center text-white font-medium text-xl md:text-2xl">
@@ -24,7 +24,7 @@ const page = () => {
           </button>
         </div>
         <div
-          className={`${styles.flyer_container} w-[50%] h-[90vh] overflow-hidden`}
+          className={`${styles.flyer_container} w-[50%] h-full overflow-hidden`}
         >
           <div className="h-[100%]">
             <Image
@@ -38,7 +38,7 @@ const page = () => {
         </div>
       </div>
        {/* Activity Details */}
-       <section  className="container flex flex-col py-10">
+       <section  className="container flex flex-col py-7">
         <EventDetails />
       </section>
     </main>

@@ -10,9 +10,9 @@ import EventDetails from "@/globals/eventdetails/EventDetails";
 const page = () => {
   return (
     <main className="w-screen flex flex-col">
-      <section className={`${styles.success} w-[100%] flex`}>
+      <section className={`${styles.success} w-[100%] h-[80vh] flex`}>
       <div
-        className={`${styles.success_container} px-4 w-[50%] h-[90vh] flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
+        className={`${styles.success_container} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
       >
         <div
           className={`${styles.success_message} flex flex-col w-full md:w-[70%] `}
@@ -70,7 +70,7 @@ const page = () => {
         </div>
       </div>
       <div
-        className={`${styles.flyer_container} w-[50%] h-[90vh] overflow-hidden`}
+        className={`${styles.flyer_container} w-[50%] h-full overflow-hidden`}
       >
         <div className="h-[100%]">
           <Image

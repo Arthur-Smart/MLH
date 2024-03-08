@@ -127,77 +127,6 @@ export default function Home() {
               type="submit"
               value="Access Activity"
             />
-
-            {/* <Dialog>
-              <input
-                {...register("email", {
-                  required: true,
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "This is not a valid email",
-                  },
-                })}
-                type="email"
-                placeholder="Enter your email"
-                className={
-                  errors.email
-                    ? "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px] border-[1px] border-[red]"
-                    : "py-[10px] px-[15px] outline-none rounded-[4px] w-[250px]"
-                }
-              />
-
-              <DialogTrigger>
-                <input
-                  disabled={!isDirty || !isValid}
-                  className={`${styles.email_btn}  py-[10px] px-[15px] ml-2 outline-none rounded-[4px] bg-[#AAA2C4] font-medium text-[#2C2C74] cursor-pointer`}
-                  type="submit"
-                  value="Access Activity"
-                />
-              </DialogTrigger>
-              <DialogContent className=" md:min-w-[850px] overflow-y-scroll h-[500px] no-scrollbar">
-                <DialogHeader>
-                  <DialogTitle className="text-xl text-start mt-7 font-semibold">
-                    Register for the activity
-                  </DialogTitle>
-                  <DialogDescription>
-                    <p className="text-lg text-start text-black font-medium">
-                      Type of staff
-                    </p>
-                    <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between mt-3">
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          checked={selectedOption === "fulltime"}
-                          onChange={() => handleOptionChange("fulltime")}
-                        />
-                        <p className="ml-2 text-base text-black">Fulltime Avenue Staff</p>
-                      </div>
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          checked={selectedOption === "locum"}
-                          onChange={() => handleOptionChange("locum")}
-                        />
-                        <p className="ml-2 text-base text-black">Locum Avenue Staff</p>
-                      </div>
-                      <div className="flex items-center">
-                        <input
-                          type="radio"
-                          checked={selectedOption === "external"}
-                          onChange={() => handleOptionChange("external")}
-                        />
-                        <p className="ml-2 text-base text-black">External/Visitor</p>
-                      </div>
-                    </div>
-                    <div className="w-full mt-3 flex flex-wrap">
-                      {selectedOption == "fulltime" && <FulltimeForm />}
-                      {selectedOption == "locum" && <FulltimeForm />}
-                      {selectedOption == "external" && <VisitorsForm />}
-                    </div>
-                  </DialogDescription>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog> */}
           </form>
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
@@ -314,7 +243,7 @@ export default function Home() {
       {/* Activity Details */}
       <section
         ref={ActivityDetailRef}
-        className="container flex flex-col py-10"
+        className="container flex flex-col py-7"
       >
         <EventDetails />
       </section>

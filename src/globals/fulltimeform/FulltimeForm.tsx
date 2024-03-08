@@ -165,11 +165,11 @@ const FulltimeForm = () => {
         <p className="text-[#666666] text-[15px] ">By submitting this information, one is allowing MLH to share this date with the activity for all instances provider</p>
         <div className="flex items-center mt-2">
         <input type="checkbox" {...register("skip")}/>
-        <p className="text-black ml-2 text-[15px]">What to skip re-entering registration info for this organizer's activities. Check this.</p>
+        <p className="text-black ml-2 text-[15px]">Want to skip re-entering registration info for this organizer's activities. Check this.</p>
         </div>   
         <div className="flex items-center mt-3">
-        <input type="checkbox" {...register("terms", {required:true})}/>
-        <p className={errors.terms ? "text-[#ED0000] ml-2 text-[15px]" : "text-black ml-2 text-[15px]"}>To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
+        <input type="checkbox" {...register("terms", {required:true})} checked/>
+        <p className="text-black ml-2 text-[15px]">To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
         </div>  
       </div>
       {errors.boardNumber || errors.firstname || errors.lastname ||errors.name ? (
