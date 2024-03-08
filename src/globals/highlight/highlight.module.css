@@ -1,0 +1,9 @@
+.insight_container{
+    height:45vh;
+}
+
+.highlight_image{
+    width:100%;
+    height:65%;
+    object-fit: cover;
+}
