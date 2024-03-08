@@ -118,9 +118,9 @@ function Navbar() {
                 {selectedLanguage}
               </h3>
             </PopoverTrigger>
-            <PopoverContent className="mt-2 w-[150px] flex flex-col items-center justify-center">
+            <PopoverContent className="mt-5 w-[150px] flex flex-col items-center justify-center">
               {languages.map((language) => (
-                <p onClick={() => setSelectedLanguage(language.title)} className="text-lg cursor-pointer hover:text-[#3E2C78]">
+                <p onClick={() => setSelectedLanguage(language.title)} className="text-base cursor-pointer hover:text-[#3E2C78]">
                   {language.title}
                 </p>
               ))}
