@@ -60,7 +60,7 @@ const Activity = () => {
         </div>
         <div className="flex items-center justify-between mt-4">
             <Link href="/registration/avenue">
-            <button className="bg-[#3E2C78] text-white py-2 px-4 rounded">Register</button>
+            <button className="bg-[#3E2C78] hover:bg-[#3E2C78]/90 text-white py-2 px-4 rounded">Register</button>
             </Link>
 
             <Link href="#">

@@ -5,6 +5,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import BANNER from "../../../public/banner.jpg";
 import Featured from "@/globals/featured/Featured";
+import Ongoing from "@/globals/ongoing/Ongoing";
+import Upcoming from "@/globals/upcoming/Upcoming";
+import FeaturedOrganization from "@/globals/featuredorganizations/FeaturedOrganization";
+import PastActivities from "@/globals/pastactivities/PastActivities";
 
 const Home = () => {
   const [selected, setSelected] = useState(1);
@@ -30,7 +34,7 @@ const Home = () => {
   ];
 
   return (
-    <main className="w-screen flex flex-col items-center justify-center py-5">
+    <main className="w-screen main flex flex-col items-center justify-center py-5 px-3">
       <section className="container px-0 rounded h-[450px] overflow-hidden bg-gray-600 my-3 flex flex-col items-center justify-center">
        
         <Image
@@ -65,6 +69,13 @@ const Home = () => {
 
         {/* Feature Activities */}
         <Featured/>
+        <div className="w-full mt-9 rounded h-[450px] overflow-hidden">
+          <Image src={BANNER} alt="mlh-banner" width={1000} height={600} className="inline_banner "/>
+        </div>
+        <Ongoing/>
+        <Upcoming/>
+        <FeaturedOrganization/>
+        <PastActivities/>
       </section>
     </main>
   );

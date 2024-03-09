@@ -8,3 +8,10 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+@media screen and (max-width:480px){
+    .activity_container{
+        height:fit-content;
+    }
+    
+}
