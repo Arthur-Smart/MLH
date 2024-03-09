@@ -19,7 +19,7 @@ const Ongoing = () => {
         <p className="cursor-pointer hover:text-[#3E2C78]">For you</p>
       </div>
 
-      <div className={`${styles.ongoing_activitie_wrapper} w-full flex mt-5`}>
+      <div className={`${styles.ongoing_activities_wrapper} w-full flex mt-5`}>
         <Activity/>
         <Activity/>
         <Activity/>

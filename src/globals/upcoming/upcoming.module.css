@@ -1,5 +1,12 @@
-.upcoming_activitie_wrapper{
+.upcoming_activities_wrapper{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 7px;
+}
+
+@media screen and (max-width:420px){
+    .upcoming_activities_wrapper{
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      
+    }
 }
