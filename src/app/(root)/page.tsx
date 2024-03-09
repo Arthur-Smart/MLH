@@ -34,7 +34,7 @@ const Home = () => {
   ];
 
   return (
-    <main className="w-screen main flex flex-col items-center justify-center py-5 px-3">
+    <main className="w-full main flex flex-col items-center justify-center py-5 px-3">
       <section className="container px-0 rounded h-[450px] overflow-hidden bg-gray-600 my-3 flex flex-col items-center justify-center">
        
         <Image
@@ -72,10 +72,13 @@ const Home = () => {
         <div className="w-full mt-9 rounded h-[450px] overflow-hidden">
           <Image src={BANNER} alt="mlh-banner" width={1000} height={600} className="inline_banner "/>
         </div>
+        <div className="w-full flex flex-col items-center justify-center">
         <Ongoing/>
         <Upcoming/>
         <FeaturedOrganization/>
         <PastActivities/>
+        </div>
+       
       </section>
     </main>
   );

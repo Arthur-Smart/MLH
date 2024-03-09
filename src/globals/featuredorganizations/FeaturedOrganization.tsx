@@ -20,7 +20,7 @@ const FeaturedOrganization = () => {
         <p className="cursor-pointer hover:text-[#3E2C78]">For you</p>
       </div>
      
-      <Carousel className="w-[90%] h-22">
+      <Carousel className="w-[85%] md:w-[90%] h-22 mt-2">
       <CarouselContent className="-ml-1">
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
