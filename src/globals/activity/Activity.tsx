@@ -54,7 +54,7 @@ const Activity = () => {
         <div className="flex items-center justify-between mt-4">
             <div className="flex items-center gap-[4px]">
                 <Image src={ONLINE} alt="CMEs calenda" width={21} height={21}/>
-                <p className="text-[14px] text-black/70">Certificate</p>
+                <p className="text-[14px] text-black/70">Online</p>
             </div>
            
         </div>
@@ -63,7 +63,7 @@ const Activity = () => {
             <button className="bg-[#3E2C78] hover:bg-[#3E2C78]/90 text-white py-2 px-4 rounded">Register</button>
             </Link>
 
-            <Link href="#">
+            <Link href="/institution/avenue">
                 <Image src={ACTIVITY_IMAGE} alt="Institution Name" height={200} width={200} className={styles.institution_logo}/>
             </Link>
         </div>
