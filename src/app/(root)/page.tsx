@@ -65,7 +65,7 @@ const Home = () => {
             <p>Filtler by activity language</p>
             <select className="ml-2 border-gray-200 border-[1px] outline-0 bg-transparent p-[4px] rounded">
               <option>English</option>
-              <option>French</option>nnnnnnnnnnpm
+              <option>French</option>
             </select>
           </div>
         </div>

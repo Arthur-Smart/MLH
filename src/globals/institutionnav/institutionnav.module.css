@@ -1,0 +1,26 @@
+.nav{
+    height:68px;
+    position: sticky;
+    top:0;
+    left:0;
+    z-index:999;
+    background-color: #fff;
+}
+
+.humburger__menu{
+    display: none;
+}
+
+@media screen and (max-width:1240px){
+    .links{
+        display: none;
+    }
+
+    .institution_nav_right{
+        display: none;
+    }
+
+    .humburger__menu{
+        display: flex;
+    }
+}

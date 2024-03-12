@@ -53,7 +53,7 @@ function Navbar() {
         <div className={`${styles.nav_center} w-[45%] flex items-center justify-center`}>
           <Popover>
           <PopoverTrigger>
-          <div className="rounded-full py-2 px-4 shadow-lg hover:shadow-xl flex items-center gap-2 cursor-pointer">
+          <div className="rounded-full py-2 px-4 bg-gray-100 flex items-center gap-2 cursor-pointer">
           <p className="text-gray-400">Quick search</p>
           <div className="bg-[#D91F4F] p-2 rounded-full">
             <Image src={SEARCH_ICON} alt="" width={20} height={20}/>
