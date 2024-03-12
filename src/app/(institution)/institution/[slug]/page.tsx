@@ -42,7 +42,6 @@ const page = () => {
         try {
           const data: any = await getOrganization(slug);
           setOrganization(data);
-          console.log("DATA DATA DATA =>", data);
         } catch (error) {
           console.error("Error fetching organization:", error);
         }
@@ -56,7 +55,7 @@ const page = () => {
 
   return (
     <main className="w-full flex flex-col items-center justify-center py-3">
-      <section className="container rounded h-[350px] flex items-center justify-center">
+      <section className="container px-0 rounded h-[350px] overflow-hidden flex items-center justify-center">
         {organization?.banner_image && (
           <Image
             src={organization.banner_image}

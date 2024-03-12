@@ -18,7 +18,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
     setTimeout(() => {
       setLoader(false)
       setVisibleActivities(prevVisibleActivities => prevVisibleActivities + 5)
-    }, 1500)
+    }, 2000)
    
   }
 
@@ -41,14 +41,14 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
         <button onClick={loadMore}>Load More</button>
       )} */}
 
-      <div className={`${styles.featured_activitie_wrapper} w-full flex mt-5`}>
+      <div className={`${styles.featured_activitie_wrapper} w-full grid  mt-5`}>
         {featured.slice(0, visibleActivities).map((activity) => (
           <Activity key={activity.id} {...activity} />
         ))}
       </div>
       {visibleActivities < featured.length && (
-        <button onClick={loadMoreActivities} className="mt-3 py-2 px-3 bg-[#3E2C78] rounded-full text-white hover:bg-[#3E2C78]/90">
-          Load more
+        <button onClick={loadMoreActivities} className={loader ? "mt-3 py-2 px-3 bg-[#3E2C78]/70 rounded-full text-white hover:bg-[#3E2C78]/90" : "mt-3 py-2 px-3 bg-[#3E2C78] rounded-full text-white hover:bg-[#3E2C78]/90"}>
+          {loader ? "Loading ..." : "Load more"}
         </button>
       )}
     </div>
