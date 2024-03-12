@@ -5,9 +5,10 @@ import Image from "next/image";
 import CERTIFICATE from "../../../public/certificate.svg";
 import LANGUAGE from "../../../public/language.svg";
 import DOLLAR_ICON from "../../../public/money.svg";
+import FREE_ICON from "../../../public/free.svg";
+
 import Speaker from "../speakers/Speaker";
 import { IActivity } from "@/interface/ActivityInterface";
-import apiService from "@/libs/utils";
 
 interface EventDetailsProps {
   event: IActivity;
@@ -15,7 +16,7 @@ interface EventDetailsProps {
 
 const EventDetails = (event: IActivity) => {
   const [selected, setSelected] = useState(1);
-  const [organization, setOrganization] = useState<IActivity>()
+  const [organization, setOrganization] = useState<IActivity>();
 
   type ButtonType = {
     id: number;
@@ -37,8 +38,6 @@ const EventDetails = (event: IActivity) => {
     // },
   ];
 
-
-  
   return (
     <>
       <div className="w-full flex flex-wrap items-center gap-5">
@@ -63,7 +62,11 @@ const EventDetails = (event: IActivity) => {
             width={30}
             height={30}
           />
-          <p className="text-base font-medium ml-2">English</p>
+          {event.language == "en" ? (
+            <p className="text-base font-medium ml-2">English</p>
+          ) : (
+            <p className="text-base font-medium ml-2">French</p>
+          )}
         </div>
         {event.event_type == "paid" ? (
           <div className="flex items-center gap-2">
@@ -71,8 +74,9 @@ const EventDetails = (event: IActivity) => {
             <p className="text-base font-medium">Paid</p>
           </div>
         ) : (
-          <div className="rounded-full bg-[#AAA2C4] px-5 py-2">
-            <p className="text-[#2C2C74]">Free</p>
+          <div className="flex items-center gap-[4px]">
+            <Image src={FREE_ICON} alt="" width={40} height={40} />
+            <p className="text-base font-medium">Free</p>
           </div>
         )}
 
@@ -82,7 +86,9 @@ const EventDetails = (event: IActivity) => {
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
         {event.presenters.length > 1 &&
-          event.presenters.map((presenter) => <Speaker key={presenter.id} />)}
+          event.presenters.map((presenter) => (
+            <Speaker key={presenter.id} presenter={presenter} />
+          ))}
 
         {/* <Speaker />
         <Speaker /> */}

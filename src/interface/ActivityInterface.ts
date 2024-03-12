@@ -1,4 +1,4 @@
-interface Presenter {
+export interface IPresenter {
     id: string;
     name: string;
     email: string;
@@ -24,7 +24,7 @@ interface Presenter {
     is_verified: boolean;
     language: string;
     organization_id: string;
-    presenters: Presenter[];
+    presenters: IPresenter[];
     remaining_seats: number;
     scheduled: boolean;
     start_date: string;
@@ -47,4 +47,5 @@ interface Presenter {
     logo: string;
     total_staffs: number;
     updated_at: string;
+    discription?:string
   }

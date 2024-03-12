@@ -15,7 +15,7 @@ const page = () => {
   const [selected, setSelected] = useState(1);
   const [organization, setOrganization] = useState<IOrganization>();
 
-  const { slug } = useParams();
+  const { slug }:any = useParams();
 
   console.log(slug);
 
@@ -40,7 +40,7 @@ const page = () => {
     const fetchData = async (): Promise<void> => {
       if (slug) {
         try {
-          const data: any = await getOrganization("");
+          const data: any = await getOrganization(slug);
           setOrganization(data);
           console.log("DATA DATA DATA =>", data);
         } catch (error) {
@@ -57,25 +57,20 @@ const page = () => {
   return (
     <main className="w-full flex flex-col items-center justify-center py-3">
       <section className="container rounded h-[350px] flex items-center justify-center">
-        <Image
-          src="http://d855-197-178-168-180.ngrok-free.app/media/MLH_institute_sample.jpg"
-          alt="Avenue Banner"
-          width={2000}
-          height={700}
-          className={styles.organization_banner}
-        />
+        {organization?.banner_image && (
+          <Image
+            src={organization.banner_image}
+            alt="Avenue Banner"
+            width={2000}
+            height={700}
+            className={styles.organization_banner}
+          />
+        )}
       </section>
       <section className="container mt-3">
         <h2 className="text-lg font-medium">About</h2>
         <p className="text-[#33333] text-[15px]">
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old.Contrary to popular belief, Lorem Ipsum is not
-          simply random text. It has roots in a piece of classical Latin
-          literature from 45 BC, making it over 2000 years old. Contrary to
-          popular belief, Lorem Ipsum is not simply random text. It has roots in
-          a piece of classical Latin literature from 45 BC, making it over 2000
-          years old.
+          {organization?.discription}
         </p>
       </section>
 

@@ -33,11 +33,9 @@ export default function Home() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [hasHappened, setHasHappened] = useState<Boolean>(false)
+  const [hasHappened, setHasHappened] = useState<Boolean>(false);
   const [organization, setOrganization] = useState<IOrganization>();
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
-
-  
 
   const scrollToActivityDetails = () => {
     if (ActivityDetailRef.current) {
@@ -69,6 +67,8 @@ export default function Home() {
     setEvent(eventDetails);
   }, []);
 
+  console.log("ACTIVITY ACTIVITY", event);
+
   // console.log(event)
 
   //GET ORGANIZATION
@@ -78,7 +78,6 @@ export default function Home() {
   //     setOrganization(data)
   //   }
   // },[event]);
-
 
   //GET ORGANIZATION
   useEffect(() => {
@@ -115,7 +114,6 @@ export default function Home() {
   //   }
   // };
 
-  
   //COUNTER
   setInterval(updateCountdown, 1000);
 
@@ -144,7 +142,7 @@ export default function Home() {
       // console.log(`${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`);
     } else {
       // console.log("The event has already occurred.");
-      setHasHappened(true)
+      setHasHappened(true);
     }
   }
 
@@ -178,44 +176,49 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Time and date */}
-          <div className="flex items-center justify-center mt-8">
-            <div className="flex items-center">
-              <Image src={CALENDAR} alt="" width={17} height={7} />
-              <p className="text-white text-[14px] md:text-[15px] ml-2">
-                {event && event.start_date.slice(0, 10)}
-              </p>
-            </div>
-            <div className="flex items-center ml-11">
-              <Image src={CLOCK} alt="" width={19} height={9} />
-              <p className="text-white text-[14px] md:text-[15px] ml-2">
-                {event && event.start_date.slice(11, 16)}AM
-              </p>
-            </div>
-          </div>
-
           {/* Counter */}
           <div className="flex items-center mt-7">
-            {hasHappened ? (<p>Hello</p>) : (
+            {hasHappened ? (
+              <p className="text-white text-center">
+                The learning activity has already happened.<br></br> However, the
+                learning materials are available. Please Register to access
+                them.Thank you!
+              </p>
+            ) : (
               <>
-            <div className="flex flex-col items-center justify-center">
-              <h2 className="font-bold text-2xl text-white">{days}</h2>
-              <p className="text-white">Days</p>
-            </div>
-            <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-              <h2 className="font-bold text-2xl text-white">{hours}</h2>
-              <p className="text-white">Hours</p>
-            </div>
-            <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-              <h2 className="font-bold text-2xl text-white">{minutes}</h2>
-              <p className="text-white">Mins</p>
-            </div>
-            <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-              <h2 className="font-bold text-2xl text-white">{seconds}</h2>
-              <p className="text-white">Secs</p>
-            </div>
-            </>)}
-            
+                {/* Time and date */}
+                <div className="flex items-center justify-center mt-8">
+                  <div className="flex items-center">
+                    <Image src={CALENDAR} alt="" width={17} height={7} />
+                    <p className="text-white text-[14px] md:text-[15px] ml-2">
+                      {event && event.start_date.slice(0, 10)}
+                    </p>
+                  </div>
+                  <div className="flex items-center ml-11">
+                    <Image src={CLOCK} alt="" width={19} height={9} />
+                    <p className="text-white text-[14px] md:text-[15px] ml-2">
+                      {event && event.start_date.slice(11, 16)}AM
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <h2 className="font-bold text-2xl text-white">{days}</h2>
+                  <p className="text-white">Days</p>
+                </div>
+                <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
+                  <h2 className="font-bold text-2xl text-white">{hours}</h2>
+                  <p className="text-white">Hours</p>
+                </div>
+                <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
+                  <h2 className="font-bold text-2xl text-white">{minutes}</h2>
+                  <p className="text-white">Mins</p>
+                </div>
+                <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
+                  <h2 className="font-bold text-2xl text-white">{seconds}</h2>
+                  <p className="text-white">Secs</p>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Email input field */}
@@ -322,34 +325,14 @@ export default function Home() {
               </>
             )}
           </section>
-
-          {/* <div
-            onClick={scrollToActivityDetails}
-            className="animate-bounce w-14 h-14 mt-11 cursor-pointer bg-[#AAA2C4] rounded-full flex items-center justify-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
-              />
-            </svg>
-          </div> */}
         </div>
         <div
           className={`${styles.flyer_container} w-[50%] h-[100%} overflow-hidden`}
         >
-          {/* {organization?.banner_image ? (
+          {organization?.banner_image ? (
             <div className="h-[100%]">
               <Image
-                src={organization.banner_image.substring(1, str.length - 1)}
+                src={organization.banner_image}
                 alt=""
                 width={1300}
                 height={1300}
@@ -368,17 +351,7 @@ export default function Home() {
                 priority
               />
             </div>
-          )} */}
-          <div className="h-[100%]">
-              <Image
-                src={FLYER}
-                alt=""
-                width={1300}
-                height={1300}
-                className={styles.flyer}
-                priority
-              />
-            </div>
+          )}
         </div>
       </section>
 

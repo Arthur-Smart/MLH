@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import styles from "./activity.module.css";
@@ -18,25 +18,25 @@ interface ActivityProps {
   featured: IActivity;
 }
 
-
 //  const Activity: React.FC<ActivityProps> = ({ featured }) => {
 const Activity = (activity: IActivity) => {
- 
-
   return (
     <div
       className={`${styles.activity_container} rounded overflow-hidden border-gray-200 border-[1px]`}
     >
-      <Image
-        src={ACTIVITY_IMAGE}
-        alt=""
-        width={400}
-        height={500}
-        style={{
-          objectFit: "cover",
-        }}
-        className="h-[45%] w-full"
-      />
+      {activity.banner && (
+        <Image
+          src={activity.banner}
+          alt=""
+          width={400}
+          height={500}
+          style={{
+            objectFit: "cover",
+          }}
+          className="h-[45%] w-full"
+        />
+      )}
+
       <div className="p-2">
         <h1 className="font-medium text-[15px]">{activity.title}</h1>
         <p className="text-[#333333] text-[14px]">{activity.description}</p>
@@ -49,7 +49,9 @@ const Activity = (activity: IActivity) => {
           </div>
           <div className="flex items-center gap-[4px]">
             <Image src={CLOCK} alt="CMEs calenda" width={20} height={20} />
-            <p className="text-[14px] text-black/70">{activity.start_date?.slice(11,16)}AM</p>
+            <p className="text-[14px] text-black/70">
+              {activity.start_date?.slice(11, 16)}AM
+            </p>
           </div>
         </div>
         <div className="flex items-center justify-between mt-4">
@@ -101,7 +103,6 @@ const Activity = (activity: IActivity) => {
 };
 
 export default Activity;
-function async(organization_id: string) {
-  throw new Error("Function not implemented.");
-}
-
+// function async(organization_id: string) {
+//   throw new Error("Function not implemented.");
+// }
