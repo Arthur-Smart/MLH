@@ -32,9 +32,7 @@ const Footer = () => {
             className={styles.logo__image}
           />
           <p className="text-white text-[15px] mt-3">
-            Medical Learning Hub (MLH) is a Med-EdTech marketplace platform that
-            enables healthcare professionals (HCPs) to search, book and access
-            trainings.{" "}
+         Medical Learning Hub(MLH) is a Med-EdTech marketplace platform that enables healthcare professionals(HCPs) to search, book and access trainings withease across Africa. MLH also allows organizations and individuals planning learning sessions to automate a lot of the currently manual processes such as issuance of certifications, CPD/CME points/credits as well as track attendace and other learning outcomes. MLH Africa is currently active across Kenya, Uganda, Nigeria, Rwanda, Senegal and soon Ghana.
           </p>
         </div>
         <div>

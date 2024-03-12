@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useParams } from "next/navigation";
+
 import Image from "next/image";
 import CALENDAR from "../../../../../public/calendar.svg";
 import CLOCK from "../../../../../public/time.svg";
@@ -13,14 +15,29 @@ import styles from "./registration.module.css";
 import EventDetails from "@/globals/eventdetails/EventDetails";
 import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
 import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
+import apiService from "@/libs/utils";
+import { IActivity, IOrganization } from "@/interface/ActivityInterface";
+import { getOrganization } from "@/endpoints/endpoints";
 
 export default function Home() {
+  // FORM STATES
   const [selectedOption, setSelectedOption] = useState(null);
   const [isEmail, setIsEmail] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [contentLoaded, setContentLoaded] = useState(false);
+  const [event, setEvent] = useState<IActivity>();
+  // console.log("THIS ARE THE EVENT DETAILS", event);
 
+  // EVENTS DAYS HOURS MINS SECS COUNTER
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [hasHappened, setHasHappened] = useState<Boolean>(false)
+  const [organization, setOrganization] = useState<IOrganization>();
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
+
+  
 
   const scrollToActivityDetails = () => {
     if (ActivityDetailRef.current) {
@@ -34,6 +51,104 @@ export default function Home() {
     setSelectedOption(option);
   };
 
+  // GET ACTIVITY DETAILS
+  const { slug } = useParams();
+
+  useEffect(() => {
+    getActivity();
+  }, []);
+
+  // GET ACTIVITY
+  const getActivity = useCallback(async () => {
+    const activity: any = await apiService.get(`api/v1/events/${slug}`);
+
+    const activityRes = JSON.stringify(activity);
+    const data = JSON.parse(activityRes);
+    const eventDetails = data.response[0].details[0].data;
+
+    setEvent(eventDetails);
+  }, []);
+
+  // console.log(event)
+
+  //GET ORGANIZATION
+  // useEffect(async():Promise<void> => {
+  //   if (event && event.organization_id) {
+  //     const data:any = await getOrganization(event.organization_id);
+  //     setOrganization(data)
+  //   }
+  // },[event]);
+
+
+  //GET ORGANIZATION
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      if (event && event.organization_id) {
+        try {
+          const data: any = await getOrganization(event.organization_id);
+          setOrganization(data);
+          console.log("DTAT =>", data);
+        } catch (error) {
+          console.error("Error fetching organization:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [event]);
+
+  // const getOrganization = async () => {
+  //   try {
+  //     if (!event || !event.organization_id) {
+  //       // Handle the case where event or organization_id is not available
+  //       return;
+  //     }
+
+  //     const organizationRes: IActivity = await apiService.get(`api/v1/organization/${event.organization_id}`);
+  //     const org = JSON.stringify(organizationRes);
+  //     const data = JSON.parse(org);
+  //     const organizationData = data.response[0].details[0].data;
+
+  //     console.log(organizationData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  
+  //COUNTER
+  setInterval(updateCountdown, 1000);
+
+  function updateCountdown() {
+    const eventDate: any = new Date(event?.start_date ?? "");
+
+    const currentDate: any = new Date();
+
+    const timeDifference = eventDate - currentDate;
+
+    if (timeDifference > 0) {
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      setDays(days);
+      setHours(hours);
+      setMinutes(minutes);
+      setSeconds(seconds);
+
+      // console.log(`${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`);
+    } else {
+      // console.log("The event has already occurred.");
+      setHasHappened(true)
+    }
+  }
+
+  // REGISTER FOR AN ACTIVITY
   const {
     register,
     handleSubmit,
@@ -56,10 +171,10 @@ export default function Home() {
         >
           <div className="flex flex-col text-center">
             <h1 className="font-bold text-2xl md:text-3xl text-white">
-              Avenue Hospital Event
+              {organization?.name}
             </h1>
             <p className="text-white text-md md:text-xl">
-              Brain Tumor Association of Africa
+              {event && event.title}
             </p>
           </div>
 
@@ -68,35 +183,39 @@ export default function Home() {
             <div className="flex items-center">
               <Image src={CALENDAR} alt="" width={17} height={7} />
               <p className="text-white text-[14px] md:text-[15px] ml-2">
-                24 May 2024
+                {event && event.start_date.slice(0, 10)}
               </p>
             </div>
             <div className="flex items-center ml-11">
               <Image src={CLOCK} alt="" width={19} height={9} />
               <p className="text-white text-[14px] md:text-[15px] ml-2">
-                10:00AM - 12:00PM
+                {event && event.start_date.slice(11, 16)}AM
               </p>
             </div>
           </div>
 
           {/* Counter */}
           <div className="flex items-center mt-7">
+            {hasHappened ? (<p>Hello</p>) : (
+              <>
             <div className="flex flex-col items-center justify-center">
-              <h2 className="font-bold text-2xl text-white">35</h2>
+              <h2 className="font-bold text-2xl text-white">{days}</h2>
               <p className="text-white">Days</p>
             </div>
             <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-              <h2 className="font-bold text-2xl text-white">4</h2>
+              <h2 className="font-bold text-2xl text-white">{hours}</h2>
               <p className="text-white">Hours</p>
             </div>
             <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-              <h2 className="font-bold text-2xl text-white">16</h2>
+              <h2 className="font-bold text-2xl text-white">{minutes}</h2>
               <p className="text-white">Mins</p>
             </div>
             <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-              <h2 className="font-bold text-2xl text-white">02</h2>
+              <h2 className="font-bold text-2xl text-white">{seconds}</h2>
               <p className="text-white">Secs</p>
             </div>
+            </>)}
+            
           </div>
 
           {/* Email input field */}
@@ -204,7 +323,7 @@ export default function Home() {
             )}
           </section>
 
-          <div
+          {/* <div
             onClick={scrollToActivityDetails}
             className="animate-bounce w-14 h-14 mt-11 cursor-pointer bg-[#AAA2C4] rounded-full flex items-center justify-center"
           >
@@ -222,30 +341,50 @@ export default function Home() {
                 d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
               />
             </svg>
-          </div>
+          </div> */}
         </div>
         <div
           className={`${styles.flyer_container} w-[50%] h-[100%} overflow-hidden`}
         >
+          {/* {organization?.banner_image ? (
+            <div className="h-[100%]">
+              <Image
+                src={organization.banner_image.substring(1, str.length - 1)}
+                alt=""
+                width={1300}
+                height={1300}
+                className={styles.flyer}
+                priority
+              />
+            </div>
+          ) : (
+            <div className="h-[100%]">
+              <Image
+                src={FLYER}
+                alt=""
+                width={1300}
+                height={1300}
+                className={styles.flyer}
+                priority
+              />
+            </div>
+          )} */}
           <div className="h-[100%]">
-            <Image
-              src={FLYER}
-              alt=""
-              width={1300}
-              height={1300}
-              className={styles.flyer}
-              priority
-            />
-          </div>
+              <Image
+                src={FLYER}
+                alt=""
+                width={1300}
+                height={1300}
+                className={styles.flyer}
+                priority
+              />
+            </div>
         </div>
       </section>
 
       {/* Activity Details */}
-      <section
-        ref={ActivityDetailRef}
-        className="container flex flex-col py-7"
-      >
-        <EventDetails />
+      <section ref={ActivityDetailRef} className="container flex flex-col py-7">
+        {event && <EventDetails {...event} />}
       </section>
     </main>
   );

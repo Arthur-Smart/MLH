@@ -1,15 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
 import styles from "./institution.module.css";
 import Image from "next/image";
 import SEARCH_ICON from "../../../../../public/search.svg";
 import ORG_BANNER from "../../../../../public/org-banner.jpg";
 import LearningActivities from "@/globals/learningactivities/LearningActivities";
 import Highlights from "@/globals/highlights/Hightlights";
+import { useParams } from "next/navigation";
+import { getOrganization } from "@/endpoints/endpoints";
+import { IOrganization } from "@/interface/ActivityInterface";
 
 const page = () => {
   const [selected, setSelected] = useState(1);
+  const [organization, setOrganization] = useState<IOrganization>()
+
+  const { slug } = useParams();
+
+  console.log(slug)
 
   type ButtonType = {
     id: number;
@@ -23,9 +31,26 @@ const page = () => {
     },
     {
       id: 2,
-      title: "Learning Activty",
+      title: "Learning Activties",
     },
   ];
+
+  //GET ORGANIZATION
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      if (slug) {
+        try {
+          const data: any = await getOrganization(slug);
+          setOrganization(data);
+          console.log("DTAT =>", data);
+        } catch (error) {
+          console.error("Error fetching organization:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [slug]);
 
   return (
     <main className="w-full flex flex-col items-center justify-center py-3">
@@ -60,10 +85,15 @@ const page = () => {
               <option>Select Location</option>
             </select>
           </div>
+          <div className="h-9 w-[1px] bg-gray-400"></div>
           <div>
             <select className="text-gray-500 text-[15px] bg-transparent outline-0">
               <option>Select Department</option>
             </select>
+          </div>
+          <div className="h-9 w-[1px] bg-gray-400"></div>
+          <div>
+            <input type="string" placeholder="Activity name" className="text-gray-500 text-[15px] bg-transparent outline-0 placeholder:text-gray-500 placeholder:text-[15px]"/>
           </div>
           <div className="bg-[#AAA2C4] h-11 w-11 rounded-full flex items-center justify-center">
             <Image

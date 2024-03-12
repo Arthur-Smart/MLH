@@ -1,3 +1,9 @@
 .activity_container{
     height:18vh;
 }
+
+@media screen and (max-width:480px){
+    .activity_container{
+        height:fit-content;
+    }
+}

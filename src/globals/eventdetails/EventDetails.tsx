@@ -1,13 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import CERTIFICATE from "../../../public/certificate.svg";
 import LANGUAGE from "../../../public/language.svg";
+import DOLLAR_ICON from "../../../public/money.svg";
 import Speaker from "../speakers/Speaker";
+import { IActivity } from "@/interface/ActivityInterface";
+import apiService from "@/libs/utils";
 
-const EventDetails = () => {
+interface EventDetailsProps {
+  event: IActivity;
+}
+
+const EventDetails = (event: IActivity) => {
   const [selected, setSelected] = useState(1);
+  const [organization, setOrganization] = useState<IActivity>()
 
   type ButtonType = {
     id: number;
@@ -19,28 +27,35 @@ const EventDetails = () => {
       id: 1,
       title: "Overview",
     },
-    {
-      id: 2,
-      title: "Agenda",
-    },
-    {
-      id: 3,
-      title: "Prerequisite",
-    },
+    // {
+    //   id: 2,
+    //   title: "Agenda",
+    // },
+    // {
+    //   id: 3,
+    //   title: "Prerequisite",
+    // },
   ];
 
+
+  
   return (
     <>
       <div className="w-full flex flex-wrap items-center gap-5">
-        <div className="flex items-center">
-          <Image
-            src={CERTIFICATE}
-            alt="CPD Certificates"
-            width={25}
-            height={25}
-          />
-          <p className="text-base font-medium ml-2">CPD certificate</p>
-        </div>
+        {event && event.is_cert_available && (
+          <>
+            <div className="flex items-center">
+              <Image
+                src={CERTIFICATE}
+                alt="CPD Certificates"
+                width={25}
+                height={25}
+              />
+              <p className="text-base font-medium ml-2">CPD certificate</p>
+            </div>
+          </>
+        )}
+
         <div className="flex items-center">
           <Image
             src={LANGUAGE}
@@ -50,19 +65,32 @@ const EventDetails = () => {
           />
           <p className="text-base font-medium ml-2">English</p>
         </div>
-        <div className="rounded-full bg-[#AAA2C4] px-5 py-2">
-          <p className="text-[#2C2C74]">Free</p>
-        </div>
+        {event.event_type == "paid" ? (
+          <div className="flex items-center gap-2">
+            <Image src={DOLLAR_ICON} alt="" width={21} height={21} />
+            <p className="text-base font-medium">Paid</p>
+          </div>
+        ) : (
+          <div className="rounded-full bg-[#AAA2C4] px-5 py-2">
+            <p className="text-[#2C2C74]">Free</p>
+          </div>
+        )}
+
+        {event && event.cpd >= 1 && (
+          <p className="font-medium text-base">CPD (yes)</p>
+        )}
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
-        <Speaker />
-        <Speaker />
-        <Speaker />
+        {event.presenters.length > 1 &&
+          event.presenters.map((presenter) => <Speaker key={presenter.id} />)}
+
+        {/* <Speaker />
+        <Speaker /> */}
       </div>
       <div className="flex items-center gap-10 mt-7 overflow-y-hidden no-scrollbar">
         {buttons.map((button) => (
           <button
-          key={button.id}
+            key={button.id}
             onClick={() => setSelected(button.id)}
             className={
               button.id == selected
@@ -82,17 +110,9 @@ const EventDetails = () => {
             <h1 className="text-[#333333] font-semibold text-lg">
               Overview one
             </h1>
-            <p className="text-[#333333] text-base">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old. Richard McClintock, a Latin
-              professor at Hampden-Sydney College in Virginia, looked up one of
-              the more obscure Latin words, consectetur, from a Lorem Ipsum
-              passage, and going through the cites of the word in classical
-              literature
-            </p>
+            <p className="text-[#333333] text-base">{event.description}</p>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <h1 className="text-[#333333] font-semibold text-lg">
               Overview two
             </h1>
@@ -119,7 +139,7 @@ const EventDetails = () => {
               passage, and going through the cites of the word in classical
               literature
             </p>
-          </div>
+          </div> */}
         </div>
       )}
 

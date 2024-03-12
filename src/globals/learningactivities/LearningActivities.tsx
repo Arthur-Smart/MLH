@@ -8,14 +8,14 @@ const LearningActivities = () => {
         <div className="flex items-center gap-3">
             <div className="flex items-center">
                 <input type="checkbox"/>
-                <p className="text-[15px] ml-2">Upcomming activity</p>
+                <p className="text-[15px] ml-2">Upcoming Activities</p>
             </div>
             <div className="flex items-center">
                 <input type="checkbox"/>
-                <p className="text-[15px] ml-2">Past activity</p>
+                <p className="text-[15px] ml-2">Past Activities</p>
             </div>
         </div>
-        <div className="w-[100%] grid grid-cols-3 gap-3 mt-3">
+        <div className="w-[100%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
             <LearningActivity/>
             <LearningActivity/>
             <LearningActivity/>

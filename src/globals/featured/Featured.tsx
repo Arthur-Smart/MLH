@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./featured.module.css";
 import Activity from "../activity/Activity";
+import { IActivity } from "@/interface/ActivityInterface";
 
-const Featured = () => {
+interface FeaturedProps {
+  featured: IActivity[];
+ }
+
+  const Featured: React.FC<FeaturedProps> = ({ featured }) => {
   return (
     <div className="w-full mt-4 flex flex-col items-center justify-center">
       <div className="w-full flex items-center justify-between">
@@ -19,12 +24,9 @@ const Featured = () => {
       </div>
 
       <div className={`${styles.featured_activitie_wrapper} w-full flex mt-5`}>
-        <Activity/>
-        <Activity/>
-        <Activity/>
-        <Activity/>
-        <Activity/>
-        <Activity/>
+        {featured.map((activity) => (
+          <Activity key={activity.id} {...activity}/>
+        ))}
       </div>
     </div>
   );
