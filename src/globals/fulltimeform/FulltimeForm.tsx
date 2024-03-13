@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import apiService from "@/libs/utils";
 import { IProfession } from "@/interface/ActivityInterface";
 
-const FulltimeForm = ({ departments, wards, selectedOption }: any) => {
+const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}: any) => {
   const router = useRouter();
 
   const [professions, setProfessions] = useState<IProfession[]>([]);
@@ -41,6 +41,8 @@ const FulltimeForm = ({ departments, wards, selectedOption }: any) => {
     delete data.skip;
     delete data.terms;
 
+
+
     console.log(data);
     await new Promise((resolve) => setTimeout(resolve, 2500));
 
@@ -51,17 +53,25 @@ const FulltimeForm = ({ departments, wards, selectedOption }: any) => {
       data
     );
 
-    // if (response.ok) {
-    //   console.log("IT WORKS");
-    //   router.push("/success");
-    // }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
       <input
-        defaultValue={selectedOption}
-        {...register("type", { required: true })}
+        defaultValue={event_id}
+        {...register("event_id", { required: true })}
+        readOnly
+        style={{display:"none"}}
+      />
+       <input
+        defaultValue="Title"
+        {...register("title", { required: true })}
+        readOnly
+        style={{display:"none"}}
+      />
+       <input
+        defaultValue="rhrjhjerh"
+        {...register("enrolled_events", { required: true })}
         readOnly
         style={{display:"none"}}
       />
@@ -169,7 +179,7 @@ const FulltimeForm = ({ departments, wards, selectedOption }: any) => {
             }
           >
             {wards.map((ward: any) => (
-              <option value={ward.id}>{ward.name}</option>
+              <option key={ward.id} value={ward.id}>{ward.name}</option>
             ))}
           </select>
         </div>
@@ -184,9 +194,9 @@ const FulltimeForm = ({ departments, wards, selectedOption }: any) => {
             {...register("location")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
-            <option value="kisumu">Kisumu</option>
-            <option value="thika">Thika</option>
-            <option value="parklands">ParkLands</option>
+            {locations?.map((location:any) => (
+              <option key={location.id} value={location.id}>{location.name}</option>
+            ))} 
           </select>
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>

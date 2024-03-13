@@ -13,6 +13,8 @@ export interface Inputs {
   title?:string
   ward:string
   type:string
+  event_id:string
+  enrolled_events:string
 }
 
 export interface IEmail {

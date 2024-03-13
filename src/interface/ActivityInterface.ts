@@ -53,7 +53,7 @@ export interface IPresenter {
   export interface IDepartment {
     id: string;
     name: string;
-    org: string;
+    organization: string;
     total_staff: number;
 }
 
@@ -68,3 +68,10 @@ export interface IWard {
   name: string;
   organization_id: string;
 };
+
+export interface ILocation  {
+  id: string;
+  name: string;
+  organization_id: string;
+};
+

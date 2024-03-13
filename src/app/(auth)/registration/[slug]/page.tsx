@@ -22,7 +22,13 @@ import EventDetails from "@/globals/eventdetails/EventDetails";
 import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
 import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
 import apiService from "@/libs/utils";
-import { IActivity, IDepartment, IOrganization, IWard } from "@/interface/ActivityInterface";
+import {
+  IActivity,
+  IDepartment,
+  ILocation,
+  IOrganization,
+  IWard,
+} from "@/interface/ActivityInterface";
 import { getOrganization } from "@/endpoints/endpoints";
 
 export default function Home() {
@@ -35,7 +41,8 @@ export default function Home() {
 
   const [departments, setDepartments] = useState<IDepartment[]>([]);
   const [profession, setProfessions] = useState([]);
-  const [wards, setWards] = useState<IWard[]>([])
+  const [wards, setWards] = useState<IWard[]>([]);
+  const [locations, setLocation] = useState<ILocation[]>([]);
 
   // console.log("THIS ARE THE DEPARTMENTS =>", departments)
 
@@ -98,7 +105,7 @@ export default function Home() {
     })
       .then((response) => response.json())
       .then((json) => {
-        setDepartments(json.results)
+        setDepartments(json.results);
       })
       .catch((error: any) => {
         console.log("error", error);
@@ -106,12 +113,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    getDepartments()
-  },[]);
+    getDepartments();
+  }, []);
 
-   // GET ORGANIZATION DEPARTMENT
-   const orgDepartments = departments.filter((department) => department?.org == organization?.name)
-
+  // GET ORGANIZATION DEPARTMENT
+  const orgDepartments = departments.filter(
+    (department) => department?.organization == organization?.id
+  );
   //GET PROFESSIONS
   const getProffesion = async () => {
     await fetch("https://api-mlh.vercel.app/api/v1/professions/", {
@@ -119,7 +127,7 @@ export default function Home() {
     })
       .then((response) => response.json())
       .then((json) => {
-        setProfessions(json.results)
+        setProfessions(json.results);
       })
       .catch((error: any) => {
         console.log("error", error);
@@ -128,25 +136,44 @@ export default function Home() {
 
   useEffect(() => {
     getProffesion();
-  },[]);
-
-
-  const getWards = async () => {
-    try {
-      const wardsRes:any = await apiService.get("api/v1/wards/");
-      setWards(wardsRes.results)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getWards()
   }, []);
 
-   // GET ORGANIZATION WARDS
-   const orgWards = wards.filter((ward) => ward?.organization_id == organization?.id)
-  
+  // GET WARDS
+  const getWards = async () => {
+    try {
+      const wardsRes: any = await apiService.get("api/v1/wards/");
+      setWards(wardsRes.results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getWards();
+  }, []);
+
+  // GET ORGANIZATION WARDS
+  const orgWards = wards.filter(
+    (ward) => ward?.organization_id == organization?.id
+  );
+
+  // GET LOCATIONS
+  const getLocations = async () => {
+    try {
+      const locationsRes: any = await apiService.get("api/v1/locations/");
+      setLocation(locationsRes.results);
+      console.log("THIS ARE THE LOCATIONS =>", locationsRes.results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getLocations();
+  }, []);
+
+  //GET ORGANIZATION LOCATIONS
+  const orgLocations = locations.filter((location) => location.organization_id == organization?.id);
 
   //COUNTER
   setInterval(updateCountdown, 1000);
@@ -356,9 +383,25 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="w-full  flex flex-wrap">
-                    {selectedOption == "full" && <FulltimeForm departments = {orgDepartments} wards={orgWards} selectedOption={selectedOption}/>}
-                    {selectedOption == "locum" && <FulltimeForm departments = {orgDepartments} wards={orgWards} selectedOption={selectedOption}/>}
-                    {selectedOption == "external" && <VisitorsForm selectedOption={selectedOption}/>}
+                    {selectedOption == "full" && (
+                      <FulltimeForm
+                        departments={orgDepartments}
+                        wards={orgWards}
+                        selectedOption={selectedOption}
+                        locations= {orgLocations}
+                        event_id = {event?.id}
+                      />
+                    )}
+                    {selectedOption == "locum" && (
+                      <FulltimeForm
+                        departments={orgDepartments}
+                        wards={orgWards}
+                        selectedOption={selectedOption}
+                      />
+                    )}
+                    {selectedOption == "external" && (
+                      <VisitorsForm selectedOption={selectedOption} />
+                    )}
                   </div>
                 </div>
               </>
