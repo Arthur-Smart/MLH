@@ -120,6 +120,7 @@ export default function Home() {
   const orgDepartments = departments.filter(
     (department) => department?.organization == organization?.id
   );
+  
   //GET PROFESSIONS
   const getProffesion = async () => {
     await fetch("https://api-mlh.vercel.app/api/v1/professions/", {

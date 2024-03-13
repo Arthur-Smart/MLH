@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./featured.module.css";
 import Activity from "../activity/Activity";
 import { IActivity } from "@/interface/ActivityInterface";
+import Tesac from "../tesac/Tesac";
 
 interface FeaturedProps {
   featured: IActivity[];
@@ -12,7 +13,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
   const [visibleActivities, setVisibleActivities] = useState(6);
   const [loader, setLoader] = useState<Boolean>(false)
 
-  console.log("FEATURED ACTIVITIES COUNT =>", featured.length);
+  // console.log("FEATURED ACTIVITIES COUNT =>", featured);
 
   const loadMoreActivities = () => {
     setLoader(true);
@@ -44,11 +45,12 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
 
       <div className={`${styles.featured_activitie_wrapper} w-full grid  mt-5`}>
         {featured.slice(0, visibleActivities).map((activity) => (
-          <Activity key={activity.id} {...activity} />
+            // <Activity key={activity.id}  {...activity} />
+            <Tesac key={activity.id} activity={activity}/>
         ))}
       </div>
       {visibleActivities < featured.length && (
-        <button onClick={loadMoreActivities} className={loader ? "mt-3 py-2 px-3 bg-[#3E2C78]/70 rounded-full text-white hover:bg-[#3E2C78]/90" : "mt-3 py-2 px-3 bg-[#3E2C78] rounded-full text-white hover:bg-[#3E2C78]/90"}>
+        <button onClick={() => loadMoreActivities} className={loader ? "mt-3 py-2 px-3 bg-[#3E2C78]/70 rounded-full text-white hover:bg-[#3E2C78]/90" : "mt-3 py-2 px-3 bg-[#3E2C78] rounded-full text-white hover:bg-[#3E2C78]/90"}>
           {loader ? "Loading ..." : "Load more"}
         </button>
       )}

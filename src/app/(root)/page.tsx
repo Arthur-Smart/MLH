@@ -14,30 +14,28 @@ import Activity from "@/globals/activity/Activity";
 
 const Home = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
-  console.log("THIS ARE THE ACTVS=>", activities);
+  // console.log("THIS ARE THE ACTVS=>", activities);
 
   
 
   //GET ALL THE ACTIVITIES
-  useEffect(() => {
-    getActivities();
-  },[]);
-
-
-  const getActivities =  useCallback(async () => {
+   const getActivities =  async () => {
     try {
       const acts: any =  await apiService.get("api/v1/events/");
       setActivities(acts.results);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  useEffect(() => {
+    getActivities();
   },[]);
 
 
-  const featuredActivities:IActivity[] = activities.filter((activity) => activity.is_featured);
-  // console.log(featuredActivities)
 
-  // console.log("THIS ARE THE FEATURED ACTIVITIES =>", featuredActivities)
+  const featuredActivities = activities.filter((activity) => activity.is_featured == true);
+   // console.log("THIS ARE THE FEATURED ACTIVITIES =>", featuredActivities)
 
   return (
     <main className="w-full main flex flex-col items-center justify-center py-5 px-3">

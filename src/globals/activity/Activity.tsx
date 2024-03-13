@@ -17,7 +17,6 @@ import { IActivity, IOrganization } from "@/interface/ActivityInterface";
 
 const Activity = (activity: IActivity) => {
   const [organization, setOrganization] = useState<IOrganization>();
-
   return (
     <div
       className={`${styles.activity_container} rounded overflow-hidden border-gray-200 border-[1px]`}
