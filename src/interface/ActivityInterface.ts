@@ -49,3 +49,22 @@ export interface IPresenter {
     updated_at: string;
     discription?:string
   }
+
+  export interface IDepartment {
+    id: string;
+    name: string;
+    org: string;
+    total_staff: number;
+}
+
+export interface IProfession {
+  id: string;
+  name: string;
+}
+
+
+export interface IWard {
+  id: string;
+  name: string;
+  organization_id: string;
+};

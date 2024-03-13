@@ -4,6 +4,24 @@
     grid-gap: 7px;
 }
 
+.activity_container{
+    height:70vh;
+}
+
+.institution_logo{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media screen and (max-width:480px){
+    .activity_container{
+        height:fit-content;
+    }
+    
+}
+
 @media screen and (max-width:420px){
     .featured_activitie_wrapper{
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

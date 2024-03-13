@@ -1,27 +1,70 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Inputs } from "@/interface/FormInterface";
 import { useForm, SubmitHandler } from "react-hook-form";
+import apiService from "@/libs/utils";
+import { IProfession } from "@/interface/ActivityInterface";
 
-const FulltimeForm = () => {
+const FulltimeForm = ({ departments, wards, selectedOption }: any) => {
   const router = useRouter();
+
+  const [professions, setProfessions] = useState<IProfession[]>([]);
+
+  //GET PROFESSIONS
+  const getProffesion = async () => {
+    await fetch("https://api-mlh.vercel.app/api/v1/professions/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setProfessions(json.results);
+      })
+      .catch((error: any) => {
+        console.log("error", error);
+      });
+  };
+
+  useEffect(() => {
+    getProffesion();
+  }, []);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+
+    delete data.skip;
+    delete data.terms;
+
+    console.log(data);
     await new Promise((resolve) => setTimeout(resolve, 2500));
 
     console.log(data);
-    router.push("/success");
+
+    const response = await apiService.post(
+      "api/v1/events/enrollment/users",
+      data
+    );
+
+    // if (response.ok) {
+    //   console.log("IT WORKS");
+    //   router.push("/success");
+    // }
   };
 
   return (
-   
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
+      <input
+        defaultValue={selectedOption}
+        {...register("type", { required: true })}
+        readOnly
+        style={{display:"none"}}
+      />
       <div className="w-full flex flex-col md:flex-row items-center gap-2">
         <div className="w-full md:w-[33.33%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
@@ -44,11 +87,11 @@ const FulltimeForm = () => {
             First name <span className="text-red-700">*</span>
           </label>
           <input
-            {...register("firstname", {
+            {...register("first_name", {
               required: true,
             })}
             className={
-              errors.firstname
+              errors.first_name
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
@@ -60,9 +103,9 @@ const FulltimeForm = () => {
             Last name <span className="text-red-700">*</span>
           </label>
           <input
-            {...register("lastname", { required: true })}
+            {...register("last_name", { required: true })}
             className={
-              errors.lastname
+              errors.last_name
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
@@ -91,22 +134,22 @@ const FulltimeForm = () => {
             {...register("profession")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
-            <option value="medical">Medical Doctor</option>
-            <option value="it">IT</option>
-            <option value="human-resouce">Human Resource</option>
+            {professions.map((profession) => (
+              <option value={profession.id}>{profession.name}</option>
+            ))}
           </select>
         </div>
       </div>
       <div className="w-full flex flex-col md:flex-row items-center gap-2">
-      <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
+        <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Medical Board NUmber(KMPD, NCK, COC, PPB){" "}
             <span className="text-red-700">*</span>
           </label>
           <input
-            {...register("boardNumber", { required: true })}
+            {...register("board_number", { required: true })}
             className={
-              errors.boardNumber
+              errors.board_number
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
@@ -118,27 +161,27 @@ const FulltimeForm = () => {
             Ward/Unit <span className="text-red-700">*</span>
           </label>
           <select
-            {...register("unit")}
+            {...register("ward")}
             className={
-              errors.unit
+              errors.workplace
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
           >
-            <option value="medical">Medical Doctor</option>
-            <option value="it">IT</option>
-            <option value="human-resouce">Human Resource</option>
+            {wards.map((ward: any) => (
+              <option value={ward.id}>{ward.name}</option>
+            ))}
           </select>
         </div>
       </div>
       <div className="w-full flex flex-col md:flex-row items-center gap-2">
-      <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
+        <div className="w-full md:w-[50%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Name of Avenue Hospital/Clinic/Office
             <span className="text-red-700">*</span>
           </label>
           <select
-            {...register("name")}
+            {...register("location")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
             <option value="kisumu">Kisumu</option>
@@ -155,33 +198,51 @@ const FulltimeForm = () => {
             {...register("department")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
-            <option value="medical">Medical Doctor</option>
-            <option value="it">IT</option>
-            <option value="human-resouce">Human Resource</option>
+            {departments.map((department: any) => (
+              <option value={department.id}>{department.name}</option>
+            ))}
           </select>
         </div>
       </div>
       <div className="w-full flex flex-col mt-3">
-        <p className="text-[#666666] text-[15px] ">By submitting this information, one is allowing MLH to share this date with the activity for all instances provider</p>
+        <p className="text-[#666666] text-[15px] ">
+          By submitting this information, one is allowing MLH to share this date
+          with the activity for all instances provider
+        </p>
         <div className="flex items-center mt-2">
-        <input type="checkbox" {...register("skip")}/>
-        <p className="text-black ml-2 text-[15px]">Want to skip re-entering registration info for this organizer's activities. Check this.</p>
-        </div>   
+          <input type="checkbox" {...register("skip")} />
+          <p className="text-black ml-2 text-[15px]">
+            Want to skip re-entering registration info for this organizer's
+            activities. Check this.
+          </p>
+        </div>
         <div className="flex items-center mt-3">
-        <input type="checkbox" {...register("terms", {required:true})} checked/>
-        <p className="text-black ml-2 text-[15px]">To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
-        </div>  
+          <input
+            type="checkbox"
+            {...register("terms", { required: true })}
+            checked
+          />
+          <p className="text-black ml-2 text-[15px]">
+            To continue, you must accept MLH terms and conditions stated{" "}
+            <span className="underline cursor-pointer">here</span>
+          </p>
+        </div>
       </div>
-      {errors.boardNumber || errors.firstname || errors.lastname ||errors.name ? (
+      {errors.board_number ||
+      errors.last_name ||
+      errors.last_name ||
+      errors.location ? (
         <p className="text-[#ED0000] mt-4">Please fill all the input fields</p>
-      ) : ("")}
-         <button
+      ) : (
+        ""
+      )}
+      <button
         disabled={isSubmitting}
         type="submit"
         className="mt-4 py-2 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2 font-medium"
       >
         {isSubmitting ? "Submitting..." : "Register"}
-        </button>
+      </button>
     </form>
   );
 };

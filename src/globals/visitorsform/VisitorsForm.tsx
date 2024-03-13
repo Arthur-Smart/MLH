@@ -4,9 +4,8 @@ import styles from "./visitorsform.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Inputs } from "@/interface/FormInterface";
 
-const VisitorsForm = () => {
+const VisitorsForm = ({selectedOption}:any) => {
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -42,11 +41,11 @@ const VisitorsForm = () => {
           </label>
           <input
             // defaultValue="test"
-            {...register("firstname", {
+            {...register("first_name", {
               required: true              
             })}
             className={
-              errors.firstname
+              errors.first_name
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px] px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
             }
@@ -58,9 +57,9 @@ const VisitorsForm = () => {
             Last name <span className="text-red-700">*</span>
           </label>
           <input
-            {...register("lastname", { required: true })}
+            {...register("last_name", { required: true })}
             className={
-              errors.lastname
+              errors.last_name
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px] px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
             }
@@ -111,9 +110,9 @@ const VisitorsForm = () => {
             <span className="text-red-700">*</span>
           </label>
           <input
-            {...register("boardNumber", { required: true })}
+            {...register("board_number", { required: true })}
             className={
-              errors.boardNumber
+              errors.board_number
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px] px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
             }
@@ -126,7 +125,7 @@ const VisitorsForm = () => {
             Name of the workplace <span className="text-red-700">*</span>
           </label>
           <select
-            {...register("unit")}
+            {...register("department")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
           >
             <option value="medical">Medical Doctor</option>
@@ -142,9 +141,9 @@ const VisitorsForm = () => {
             <span className="text-red-700">*</span>
           </label>
           <input
-            {...register("name", { required: true })}
+            {...register("location", { required: true })}
             className={
-              errors.name
+              errors.location
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px] px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
             }
@@ -164,7 +163,7 @@ const VisitorsForm = () => {
         <p className={errors.terms ? "text-[#ED0000] ml-2 text-[15px]" : "text-black ml-2 text-[16px]"}>To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
         </div>  
       </div>
-      {errors.boardNumber || errors.firstname || errors.lastname ||errors.name ? (
+      {errors.board_number || errors.first_name || errors.last_name ||errors.workplace ? (
         <p className="text-[#ED0000] mt-4">Please fill all the input fields</p>
       ) : ("")}
        <button

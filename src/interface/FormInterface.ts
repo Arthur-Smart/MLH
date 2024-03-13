@@ -1,15 +1,18 @@
 export interface Inputs {
   email: string
-  firstname: string
-  lastname:string 
+  first_name: string
+  last_name:string 
   profession:string
   gender: string
-  boardNumber:string
-  unit:string
-  name:string
+  board_number:string
+  workplace:string
+  location:string
   department?:string
-  skip:string
-  terms:string
+  skip?:string
+  terms?:string
+  title?:string
+  ward:string
+  type:string
 }
 
 export interface IEmail {

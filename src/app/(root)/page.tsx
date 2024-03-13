@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import BANNER from "../../../public/banner.jpg";
 import Featured from "@/globals/featured/Featured";
@@ -10,6 +10,7 @@ import FeaturedOrganization from "@/globals/featuredorganizations/FeaturedOrgani
 import PastActivities from "@/globals/pastactivities/PastActivities";
 import apiService from "@/libs/utils";
 import { IActivity } from "@/interface/ActivityInterface";
+import Activity from "@/globals/activity/Activity";
 
 const Home = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
@@ -34,6 +35,7 @@ const Home = () => {
 
 
   const featuredActivities:IActivity[] = activities.filter((activity) => activity.is_featured);
+  // console.log(featuredActivities)
 
   // console.log("THIS ARE THE FEATURED ACTIVITIES =>", featuredActivities)
 
@@ -71,7 +73,9 @@ const Home = () => {
         </div>
 
         {/* Feature Activities */}
-        <Featured featured={featuredActivities} />
+        {/* <Featured featured={featuredActivities} /> */}
+
+       <Featured featured={featuredActivities}/>
         <div className="w-full mt-9 rounded h-[450px] overflow-hidden">
           <Image
             src={BANNER}

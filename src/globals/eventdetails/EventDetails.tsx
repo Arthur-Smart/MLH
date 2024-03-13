@@ -85,7 +85,7 @@ const EventDetails = (event: IActivity) => {
         )}
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
-        {event.presenters.length > 1 &&
+        {event.presenters?.length > 1 &&
           event.presenters.map((presenter) => (
             <Speaker key={presenter.id} presenter={presenter} />
           ))}

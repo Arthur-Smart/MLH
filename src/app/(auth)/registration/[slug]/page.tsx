@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  Suspense,
+} from "react";
 import { useParams } from "next/navigation";
 
 import Image from "next/image";
@@ -16,7 +22,7 @@ import EventDetails from "@/globals/eventdetails/EventDetails";
 import FulltimeForm from "@/globals/fulltimeform/FulltimeForm";
 import VisitorsForm from "@/globals/visitorsform/VisitorsForm";
 import apiService from "@/libs/utils";
-import { IActivity, IOrganization } from "@/interface/ActivityInterface";
+import { IActivity, IDepartment, IOrganization, IWard } from "@/interface/ActivityInterface";
 import { getOrganization } from "@/endpoints/endpoints";
 
 export default function Home() {
@@ -26,24 +32,25 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [contentLoaded, setContentLoaded] = useState(false);
   const [event, setEvent] = useState<IActivity>();
-  // console.log("THIS ARE THE EVENT DETAILS", event);
+
+  const [departments, setDepartments] = useState<IDepartment[]>([]);
+  const [profession, setProfessions] = useState([]);
+  const [wards, setWards] = useState<IWard[]>([])
+
+  // console.log("THIS ARE THE DEPARTMENTS =>", departments)
 
   // EVENTS DAYS HOURS MINS SECS COUNTER
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [hasHappened, setHasHappened] = useState<Boolean>(false);
+
   const [organization, setOrganization] = useState<IOrganization>();
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
-  const scrollToActivityDetails = () => {
-    if (ActivityDetailRef.current) {
-      ActivityDetailRef?.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  };
+  const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
+  // console.log("THIS IS THE ACTIVITY=>", event);
+  // console.log("THIS ARE THE WARDS =>", wards)
 
   const handleOptionChange = (option: any) => {
     setSelectedOption(option);
@@ -67,18 +74,6 @@ export default function Home() {
     setEvent(eventDetails);
   }, []);
 
-  console.log("ACTIVITY ACTIVITY", event);
-
-  // console.log(event)
-
-  //GET ORGANIZATION
-  // useEffect(async():Promise<void> => {
-  //   if (event && event.organization_id) {
-  //     const data:any = await getOrganization(event.organization_id);
-  //     setOrganization(data)
-  //   }
-  // },[event]);
-
   //GET ORGANIZATION
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -96,23 +91,62 @@ export default function Home() {
     fetchData();
   }, [event]);
 
-  // const getOrganization = async () => {
-  //   try {
-  //     if (!event || !event.organization_id) {
-  //       // Handle the case where event or organization_id is not available
-  //       return;
-  //     }
+  //GET DEPARTMENTS
+  const getDepartments = async () => {
+    await fetch("https://api-mlh.vercel.app/api/v1/departments/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setDepartments(json.results)
+      })
+      .catch((error: any) => {
+        console.log("error", error);
+      });
+  };
 
-  //     const organizationRes: IActivity = await apiService.get(`api/v1/organization/${event.organization_id}`);
-  //     const org = JSON.stringify(organizationRes);
-  //     const data = JSON.parse(org);
-  //     const organizationData = data.response[0].details[0].data;
+  useEffect(() => {
+    getDepartments()
+  },[]);
 
-  //     console.log(organizationData);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+   // GET ORGANIZATION DEPARTMENT
+   const orgDepartments = departments.filter((department) => department?.org == organization?.name)
+
+  //GET PROFESSIONS
+  const getProffesion = async () => {
+    await fetch("https://api-mlh.vercel.app/api/v1/professions/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setProfessions(json.results)
+      })
+      .catch((error: any) => {
+        console.log("error", error);
+      });
+  };
+
+  useEffect(() => {
+    getProffesion();
+  },[]);
+
+
+  const getWards = async () => {
+    try {
+      const wardsRes:any = await apiService.get("api/v1/wards/");
+      setWards(wardsRes.results)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getWards()
+  }, []);
+
+   // GET ORGANIZATION WARDS
+   const orgWards = wards.filter((ward) => ward?.organization_id == organization?.id)
+  
 
   //COUNTER
   setInterval(updateCountdown, 1000);
@@ -138,11 +172,8 @@ export default function Home() {
       setHours(hours);
       setMinutes(minutes);
       setSeconds(seconds);
-
-      // console.log(`${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`);
     } else {
       // console.log("The event has already occurred.");
-      setHasHappened(true);
     }
   }
 
@@ -180,42 +211,50 @@ export default function Home() {
           <div className="flex items-center mt-7">
             {hasHappened ? (
               <p className="text-white text-center">
-                The learning activity has already happened.<br></br> However, the
-                learning materials are available. Please Register to access
+                The learning activity has already happened.<br></br> However,
+                the learning materials are available. Please Register to access
                 them.Thank you!
               </p>
             ) : (
               <>
                 {/* Time and date */}
-                <div className="flex items-center justify-center mt-8">
-                  <div className="flex items-center">
-                    <Image src={CALENDAR} alt="" width={17} height={7} />
-                    <p className="text-white text-[14px] md:text-[15px] ml-2">
-                      {event && event.start_date.slice(0, 10)}
-                    </p>
+                <div className="flex flex-col">
+                  <div className="flex items-center justify-center mt-8">
+                    <div className="flex items-center">
+                      <Image src={CALENDAR} alt="" width={17} height={7} />
+                      <p className="text-white text-[14px] md:text-[15px] ml-2">
+                        {event && event.start_date.slice(0, 10)}
+                      </p>
+                    </div>
+                    <div className="flex items-center ml-11">
+                      <Image src={CLOCK} alt="" width={19} height={9} />
+                      <p className="text-white text-[14px] md:text-[15px] ml-2">
+                        {event && event.start_date.slice(11, 16)}AM
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center ml-11">
-                    <Image src={CLOCK} alt="" width={19} height={9} />
-                    <p className="text-white text-[14px] md:text-[15px] ml-2">
-                      {event && event.start_date.slice(11, 16)}AM
-                    </p>
+                  <div className="flex">
+                    <div className="flex flex-col items-center justify-center">
+                      <h2 className="font-bold text-2xl text-white">{days}</h2>
+                      <p className="text-white">Days</p>
+                    </div>
+                    <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
+                      <h2 className="font-bold text-2xl text-white">{hours}</h2>
+                      <p className="text-white">Hours</p>
+                    </div>
+                    <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
+                      <h2 className="font-bold text-2xl text-white">
+                        {minutes}
+                      </h2>
+                      <p className="text-white">Mins</p>
+                    </div>
+                    <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
+                      <h2 className="font-bold text-2xl text-white">
+                        {seconds}
+                      </h2>
+                      <p className="text-white">Secs</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <h2 className="font-bold text-2xl text-white">{days}</h2>
-                  <p className="text-white">Days</p>
-                </div>
-                <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-                  <h2 className="font-bold text-2xl text-white">{hours}</h2>
-                  <p className="text-white">Hours</p>
-                </div>
-                <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-                  <h2 className="font-bold text-2xl text-white">{minutes}</h2>
-                  <p className="text-white">Mins</p>
-                </div>
-                <div className="flex flex-col items-center justify-center ml-[30px] md:ml-[60px]">
-                  <h2 className="font-bold text-2xl text-white">{seconds}</h2>
-                  <p className="text-white">Secs</p>
                 </div>
               </>
             )}
@@ -290,8 +329,8 @@ export default function Home() {
                     <div className="flex items-center">
                       <input
                         type="radio"
-                        checked={selectedOption === "fulltime"}
-                        onChange={() => handleOptionChange("fulltime")}
+                        checked={selectedOption === "full"}
+                        onChange={() => handleOptionChange("full")}
                       />
                       <p className="ml-2 text-base text-black">
                         Fulltime Avenue Staff
@@ -317,9 +356,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="w-full  flex flex-wrap">
-                    {selectedOption == "fulltime" && <FulltimeForm />}
-                    {selectedOption == "locum" && <FulltimeForm />}
-                    {selectedOption == "external" && <VisitorsForm />}
+                    {selectedOption == "full" && <FulltimeForm departments = {orgDepartments} wards={orgWards} selectedOption={selectedOption}/>}
+                    {selectedOption == "locum" && <FulltimeForm departments = {orgDepartments} wards={orgWards} selectedOption={selectedOption}/>}
+                    {selectedOption == "external" && <VisitorsForm selectedOption={selectedOption}/>}
                   </div>
                 </div>
               </>

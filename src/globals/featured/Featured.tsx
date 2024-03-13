@@ -8,6 +8,7 @@ interface FeaturedProps {
 }
 
 const Featured: React.FC<FeaturedProps> = ({ featured }) => {
+  
   const [visibleActivities, setVisibleActivities] = useState(6);
   const [loader, setLoader] = useState<Boolean>(false)
 
