@@ -80,9 +80,9 @@ const EventDetails = (event: IActivity) => {
           </div>
         )}
 
-        {event && event.cpd >= 1 && (
+        {/* {event && event.cpd >= 1 && (
           <p className="font-medium text-base">CPD (yes)</p>
-        )}
+        )} */}
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
         {event.presenters?.length > 1 &&
@@ -93,7 +93,7 @@ const EventDetails = (event: IActivity) => {
         {/* <Speaker />
         <Speaker /> */}
       </div>
-      <div className="flex items-center gap-10 mt-7 overflow-y-hidden no-scrollbar">
+      <div className="flex items-center gap-10 mt-3 overflow-y-hidden no-scrollbar">
         {buttons.map((button) => (
           <button
             key={button.id}
@@ -111,7 +111,7 @@ const EventDetails = (event: IActivity) => {
 
       {/* Overview | Agenda | Prerequisite Details */}
       {selected == 1 && (
-        <div className="flex flex-col mt-7">
+        <div className="flex flex-col mt-3">
           <div className="mb-4">
             <h1 className="text-[#333333] font-semibold text-lg">
               Overview one

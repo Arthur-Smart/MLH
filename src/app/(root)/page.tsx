@@ -17,7 +17,7 @@ import axios from "axios";
 const Home = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
   const [featured, setFeatured] = useState<IActivity[]>([]);
-  console.log("THIS ARE THE FEATURED =>", featured)
+  console.log("THIS ARE THE FEATURED =>", activities)
   
 
   //GET ALL THE ACTIVITIES

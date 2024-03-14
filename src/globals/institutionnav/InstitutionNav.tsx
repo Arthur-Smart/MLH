@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./institutionnav.module.css";
 import Image from "next/image";
-import LOGO from "../../../public/logo.svg";
+import LOGO from "../../../public/avenue.png";
 import HUMBURGER_ICON from "../../../public/menu.svg";
 import {
   Popover,
@@ -11,8 +11,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+
 function InstitutionNav() {
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
+  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  
   type LangType = {
     id: number;
     title: string;
@@ -39,7 +41,7 @@ function InstitutionNav() {
             src={LOGO}
             alt="Medical Learning Hub"
             height={80}
-            width={80}
+            width={60}
             className="cursor-pointer"
           />
           <div className={`${styles.links} flex items-center ml-5`}>

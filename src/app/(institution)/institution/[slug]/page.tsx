@@ -10,6 +10,7 @@ import Highlights from "@/globals/highlights/Hightlights";
 import { useParams } from "next/navigation";
 import { getOrganization } from "@/endpoints/endpoints";
 import { IOrganization } from "@/interface/ActivityInterface";
+import InstitutionHeroSkeleton from "@/globals/skeletons/institutionheroskeleton/InstitutionHeroSkeleton";
 
 const page = () => {
   const [selected, setSelected] = useState(1);
@@ -56,7 +57,12 @@ const page = () => {
   //GET ORGANIZATION ACTIVITIES
 
   return (
+    
     <main className="w-full flex flex-col items-center justify-center py-3">
+      {organization == null ? <InstitutionHeroSkeleton/> : (<>
+        <section className="container px-0 py-2">
+        <h1 className="text-lg font-semibold">{organization?.name}</h1>
+      </section>
       <section className="container px-0 rounded h-[350px] overflow-hidden flex items-center justify-center">
         {organization?.banner_image && (
           <Image
@@ -68,6 +74,8 @@ const page = () => {
           />
         )}
       </section>
+      </>)}
+     
       <section className="container mt-3">
         <h2 className="text-lg font-medium">About</h2>
         <p className="text-[#33333] text-[15px]">

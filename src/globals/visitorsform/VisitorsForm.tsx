@@ -1,19 +1,21 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import styles from "./visitorsform.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Inputs } from "@/interface/FormInterface";
-import axios from "axios"
+import axios from "axios";
 import { IProfession } from "@/interface/ActivityInterface";
 
-const VisitorsForm = ({departments,
+const VisitorsForm = ({
+  departments,
   wards,
   selectedOption,
   locations,
   event_id,
-  email}:any) => {
+  email,
+}: any) => {
   const router = useRouter();
   const [apiRes, setApiRes] = useState<string | undefined>();
   const [professions, setProfessions] = useState<IProfession[]>([]);
@@ -51,9 +53,9 @@ const VisitorsForm = ({departments,
 
   // REGISTER FOR AN ACTIVITY
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    // delete data.skip;
-    // delete data.terms;
-console.log(data)
+    delete data.skip;
+    delete data.terms;
+    console.log(data);
     try {
       // }
       let res: any = await axios.post(
@@ -70,41 +72,32 @@ console.log(data)
       setApiRes(res.data.response[0].details[0].message);
 
       // if(apiRes){
-        router.replace(`/success/${event_id}`)
+      router.replace(`/success/${event_id}`);
       // }
-
     } catch (error) {
       console.log("THIS IS THE ERROR =>", error);
     }
   };
 
-
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col "
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col ">
       <input
         defaultValue={event_id}
         {...register("event_id", { required: true })}
         readOnly
         style={{ display: "none" }}
       />
-       <input
-        defaultValue="Title"
-        {...register("title", { required: true })}
-        readOnly
-        style={{ display: "none" }}
-      />
-       <input
+
+      <input
         defaultValue={selectedOption}
         {...register("type", { required: true })}
         readOnly
         style={{ display: "none" }}
       />
-       <input
-        defaultValue="workplace"
-        {...register("workplace", { required: true })}
+
+      <input
+        defaultValue="3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        {...register("department", { required: true })}
         readOnly
         style={{ display: "none" }}
       />
@@ -116,7 +109,7 @@ console.log(data)
           </label>
           <input
             defaultValue={email}
-            {...register("email" , {required:true})}
+            {...register("email", { required: true })}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
             placeholder="Enter email"
             // readOnly
@@ -129,7 +122,7 @@ console.log(data)
           <input
             // defaultValue="test"
             {...register("first_name", {
-              required: true              
+              required: true,
             })}
             className={
               errors.first_name
@@ -207,57 +200,80 @@ console.log(data)
           <label className="text-[15px] text-[#666666]">
             Name of the workplace <span className="text-red-700">*</span>
           </label>
-          <select
-            {...register("department")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
-          >
-            <option value="medical">Medical Doctor</option>
-            <option value="it">IT</option>
-            <option value="human-resouce">Human Resource</option>
-          </select>
+          <input
+            {...register("workplace", { required: true })}
+            className={
+              errors.workplace
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px] px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
+            }
+            placeholder="Enter workplace name"
+          />
         </div>
       </div>
       <div className="w-full flex flex-col md:flex-row items-center gap-2">
-
         <div className="w-full md:w-[50%]  flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
-            Name of Avenue Hospital/Clinic/Office
+            Industry Job Title
             <span className="text-red-700">*</span>
           </label>
-          <select
-            {...register("location")}
-            className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
-          >
-            {locations?.map((location: any) => (
-              <option key={location.id} value={location.id}>
-                {location.name}
-              </option>
-            ))}
-          </select>
+          <input
+            {...register("title", { required: true })}
+            className={
+              errors.title
+                ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px] px-3 outline-0"
+                : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px] px-3 outline-0"
+            }
+            placeholder="Enter workplace name"
+          />
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
       </div>
       <div className="w-full flex flex-col mt-3">
-        <p className="text-[#666666] text-[15px] ">By submitting this information, one is allowing MLH to share this date with the activity for all instances provider</p>
+        <p className="text-[#666666] text-[15px] ">
+          By submitting this information, one is allowing MLH to share this date
+          with the activity for all instances provider
+        </p>
         <div className="flex items-center mt-2">
-        <input type="checkbox" {...register("skip")}/>
-        <p className="text-black ml-2 text-[15px]">What to skip re-entering registration info for this organizer's activities. Check this.</p>
-        </div>   
+          <input type="checkbox" {...register("skip")} />
+          <p className="text-black ml-2 text-[15px]">
+            What to skip re-entering registration info for this organizer's
+            activities. Check this.
+          </p>
+        </div>
         <div className="flex items-center mt-3">
-        <input type="checkbox" {...register("terms", {required:true})} checked/>
-        <p className={errors.terms ? "text-[#ED0000] ml-2 text-[15px]" : "text-black ml-2 text-[16px]"}>To continue, you must accept MLH terms and conditions stated <span className="underline cursor-pointer">here</span></p>
-        </div>  
+          <input
+            type="checkbox"
+            {...register("terms", { required: true })}
+            checked
+          />
+          <p
+            className={
+              errors.terms
+                ? "text-[#ED0000] ml-2 text-[15px]"
+                : "text-black ml-2 text-[16px]"
+            }
+          >
+            To continue, you must accept MLH terms and conditions stated{" "}
+            <span className="underline cursor-pointer">here</span>
+          </p>
+        </div>
       </div>
-      {errors.board_number || errors.first_name || errors.last_name ||errors.workplace ? (
+      {errors.board_number ||
+      errors.first_name ||
+      errors.last_name ||
+      errors.workplace ? (
         <p className="text-[#ED0000] mt-4">Please fill all the input fields</p>
-      ) : ("")}
-       <button
+      ) : (
+        ""
+      )}
+      <button
         disabled={isSubmitting}
         type="submit"
         className="py-2 px-4 bg-[#2C2C74] w-[150px] flex self-end items-center justify-center text-white rounded-md mt-2 font-medium"
       >
         {isSubmitting ? "Submitting..." : "Register"}
-        </button>
+      </button>
     </form>
   );
 };

@@ -38,6 +38,7 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [contentLoaded, setContentLoaded] = useState(false);
   const [event, setEvent] = useState<IActivity>();
+  const [status, setStatus] = useState<Boolean>(false)
 
   const [departments, setDepartments] = useState<IDepartment[]>([]);
   const [profession, setProfessions] = useState([]);
@@ -54,10 +55,7 @@ export default function Home() {
   const [organization, setOrganization] = useState<IOrganization>();
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
-  const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
-
-  // console.log("THIS IS THE ACTIVITY=>", event);
-  // console.log("THIS ARE THE WARDS =>", wards)
+  // const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
 
   const handleOptionChange = (option: any) => {
     setSelectedOption(option);
@@ -116,7 +114,7 @@ export default function Home() {
     getDepartments();
   }, []);
 
-  // GET ORGANIZATION DEPARTMENT
+  // GET ORGANIZATION DEPARTMENTS
   const orgDepartments = departments.filter(
     (department) => department?.organization == organization?.id
   );
@@ -138,6 +136,7 @@ export default function Home() {
   useEffect(() => {
     getProffesion();
   }, []);
+  
 
   // GET WARDS
   const getWards = async () => {
@@ -183,13 +182,16 @@ export default function Home() {
 
   function updateCountdown() {
     const eventDate: any = new Date(event?.start_date ?? "");
+    const eventEndDate:any = new Date(event?.end_date ?? "")
 
     const currentDate: any = new Date();
-    console.log(eventDate);
-    console.log(currentDate);
 
     const timeDifference = eventDate - currentDate;
-    console.log(timeDifference);
+
+    const hasHappened = currentDate > eventEndDate;
+    setStatus(hasHappened);
+
+    console.log(hasHappened);
 
     if (timeDifference > 0) {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -209,6 +211,8 @@ export default function Home() {
       // console.log("The event has already occurred.");
     }
   }
+
+ 
 
   // REGISTER FOR AN ACTIVITY
   const {
@@ -243,17 +247,17 @@ export default function Home() {
 
           {/* Counter */}
           <div className="flex items-center mt-7">
-            {hasHappened ? (
-              // <p className="text-white text-center">
-              //   The learning activity has already happened.<br></br> However,
-              //   the learning materials are available. Please Register to access
-              //   them.Thank you!
-              // </p>
-              <>
-                {" "}
-                <p>Activity in progress. Join now</p>
-                <button className="bg-[#AAA2C4] w-[250px] py-2 px-2 rounded-sm text-[#2C2C74] mt-11">Join now</button>
-              </>
+            {status ? (
+              <p className="text-white text-center">
+                The learning activity has already happened.<br></br> However,
+                the learning materials are available. Please Register to access
+                them.Thank you!
+              </p>
+              // <div className="w-full text-white">
+              //   {" "}
+              //   <p>Activity in progress. Join now</p>
+              //   <button className="bg-[#AAA2C4] w-[250px] py-2 px-2 rounded-sm text-[#2C2C74] mt-11">Join now</button>
+              // </div>
             ) : (
               <>
                 {/* Time and date */}
@@ -301,7 +305,7 @@ export default function Home() {
 
           {/* Email input field */}
           <div className="flex"></div>
-          <form
+          {!status && (<form
             onSubmit={handleSubmit(onSubmit)}
             className={`${styles.email_form} flex mt-9`}
           >
@@ -327,7 +331,8 @@ export default function Home() {
               type="submit"
               value="Access Activity"
             />
-          </form>
+          </form>)}
+          
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
           )}
@@ -434,10 +439,10 @@ export default function Home() {
         <div
           className={`${styles.flyer_container} w-[50%] h-[100%} overflow-hidden`}
         >
-          {organization?.banner_image ? (
+          {event?.banner ? (
             <div className="h-[100%]">
               <Image
-                src={organization.banner_image}
+                src={event?.banner}
                 alt=""
                 width={1300}
                 height={1300}
