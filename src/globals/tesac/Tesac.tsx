@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 
 import styles from "./tesac.module.css";
 import apiService from "@/libs/utils";
+import { act } from "react-dom/test-utils";
 
 const Tesac = ({ activity }: { activity: IActivity }) => {
   const [organization, setOrganization] = useState<IOrganization>();
@@ -25,8 +26,6 @@ const Tesac = ({ activity }: { activity: IActivity }) => {
       const orgDetails: any = await apiService.get(
         `api/v1/organization/${activity.organization_id}`
       );
-      //   setActivities(acts.results);
-      // const eventDetails = jsonResponse.response[0]?.details[0]?.data;
 
       console.log("IT WORKS =>", orgDetails.response[0]?.details[0]?.data);
       setOrganization(orgDetails.response[0]?.details[0]?.data);
@@ -39,6 +38,32 @@ const Tesac = ({ activity }: { activity: IActivity }) => {
     console.log("eyeyeye");
     getOrganization();
   }, []);
+
+  // FORMART DATE
+  const originalDateString = activity.start_date;
+  const originalDate = new Date(originalDateString);
+
+  function getMonthName(monthNumber: any) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return months[monthNumber];
+  }
+
+  const formattedDate = `${originalDate.getFullYear()} ${getMonthName(
+    originalDate.getMonth()
+  )} ${originalDate.getDate()}`;
 
   return (
     <div
@@ -61,14 +86,15 @@ const Tesac = ({ activity }: { activity: IActivity }) => {
 
       <div className="p-2">
         <h1 className="font-medium text-[15px]">{activity.title}</h1>
-        <p className="text-[#333333] text-[14px]">
+        {/* <p className="text-[#333333] text-[14px]">
           {activity.description.slice(0, 20)}
-        </p>
+        </p> */}
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-[4px]">
             <Image src={CALENDAR} alt="CMEs calenda" width={15} height={15} />
             <p className="text-[14px] text-black/70">
-              {activity.start_date?.slice(0, 10)}
+              {/* {activity.start_date?.slice(0, 10)} */}
+              {formattedDate}
             </p>
           </div>
           <div className="flex items-center gap-[4px]">

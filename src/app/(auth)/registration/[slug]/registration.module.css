@@ -8,8 +8,8 @@ overflow-x:hidden;
 
 .flyer{
     width:100%;
-    /* height:100%; */
-    object-fit:scale-down;
+    height:100%;
+    object-fit:cover;
 }
 
 .form_btn:disabled{

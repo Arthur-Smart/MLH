@@ -30,6 +30,7 @@ import {
   IWard,
 } from "@/interface/ActivityInterface";
 import { getOrganization } from "@/endpoints/endpoints";
+import RegistrationSkeleton from "@/globals/skeletons/registrationskeleton/RegistrationSkeleton";
 
 export default function Home() {
   // FORM STATES
@@ -55,7 +56,7 @@ export default function Home() {
   const [organization, setOrganization] = useState<IOrganization>();
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
-  // const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
+  const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
 
   const handleOptionChange = (option: any) => {
     setSelectedOption(option);
@@ -232,7 +233,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <section className={`${styles.registration} w-[100%] h-full flex`}>
+      {event == null ? <RegistrationSkeleton/> : (  <section className={`${styles.registration} w-[100%] h-full flex`}>
         <div
           className={`${styles.form} px-4 w-[50%] h-full flex flex-col items-center justify-center bg-[#3E2C78] w-[100%]`}
         >
@@ -247,7 +248,7 @@ export default function Home() {
 
           {/* Counter */}
           <div className="flex items-center mt-7">
-            {status ? (
+            {hasHappened  ? (
               <p className="text-white text-center">
                 The learning activity has already happened.<br></br> However,
                 the learning materials are available. Please Register to access
@@ -305,7 +306,7 @@ export default function Home() {
 
           {/* Email input field */}
           <div className="flex"></div>
-          {!status && (<form
+          {!hasHappened  && (<form
             onSubmit={handleSubmit(onSubmit)}
             className={`${styles.email_form} flex mt-9`}
           >
@@ -463,7 +464,8 @@ export default function Home() {
             </div>
           )}
         </div>
-      </section>
+      </section>)}
+    
 
       {/* Activity Details */}
       <section ref={ActivityDetailRef} className="container flex flex-col py-7">
