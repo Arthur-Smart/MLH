@@ -43,8 +43,9 @@ export default function Home() {
   const [profession, setProfessions] = useState([]);
   const [wards, setWards] = useState<IWard[]>([]);
   const [locations, setLocation] = useState<ILocation[]>([]);
+  const [email, setEmail] = useState<string>("");
 
-  // console.log("THIS ARE THE DEPARTMENTS =>", departments)
+
 
   // EVENTS DAYS HOURS MINS SECS COUNTER
   const [days, setDays] = useState(0);
@@ -56,6 +57,7 @@ export default function Home() {
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
   const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
+  
   // console.log("THIS IS THE ACTIVITY=>", event);
   // console.log("THIS ARE THE WARDS =>", wards)
 
@@ -153,6 +155,7 @@ export default function Home() {
     getWards();
   }, []);
 
+
   // GET ORGANIZATION WARDS
   const orgWards = wards.filter(
     (ward) => ward?.organization_id == organization?.id
@@ -183,8 +186,13 @@ export default function Home() {
     const eventDate: any = new Date(event?.start_date ?? "");
 
     const currentDate: any = new Date();
+    console.log(eventDate)
+    console.log(currentDate)
+    
 
     const timeDifference = eventDate - currentDate;
+    console.log(timeDifference)
+
 
     if (timeDifference > 0) {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -214,6 +222,7 @@ export default function Home() {
   const onSubmit: SubmitHandler<IEmail> = (data) => {
     console.log(data);
     setIsEmail(true);
+    setEmail(data.email)
     setShowModal(true);
     setTimeout(() => {
       setContentLoaded(true);
@@ -391,6 +400,7 @@ export default function Home() {
                         selectedOption={selectedOption}
                         locations= {orgLocations}
                         event_id = {event?.id}
+                        email = {email}
                       />
                     )}
                     {selectedOption == "locum" && (
@@ -398,10 +408,18 @@ export default function Home() {
                         departments={orgDepartments}
                         wards={orgWards}
                         selectedOption={selectedOption}
+                        locations= {orgLocations}
+                        event_id = {event?.id}
+                        email = {email}
                       />
                     )}
                     {selectedOption == "external" && (
-                      <VisitorsForm selectedOption={selectedOption} />
+                      <VisitorsForm departments={orgDepartments}
+                      wards={orgWards}
+                      selectedOption={selectedOption}
+                      locations= {orgLocations}
+                      event_id = {event?.id}
+                      email = {email}/>
                     )}
                   </div>
                 </div>

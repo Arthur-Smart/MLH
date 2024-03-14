@@ -1,13 +1,20 @@
-import React from "react";
+"use client"
+
+import React, { useEffect } from "react";
 import styles from "./registered.module.css";
 import Image from "next/image";
-import FLYER from "../../../../public/flyer.svg";
-import THUMB from "../../../../public/thumb.svg";
-import CALENDAR from "../../../../public/calendar.svg";
-import CLOCK from "../../../../public/time.svg";
+import FLYER from "../../../../../public/flyer.svg";
+import THUMB from "../../../../../public/thumb.svg";
+import CALENDAR from "../../../../../public/calendar.svg";
+import CLOCK from "../../../../../public/time.svg";
 import EventDetails from "@/globals/eventdetails/EventDetails";
+import { useParams } from "next/navigation";
+
 
 const page = () => {
+  const {slug} = useParams();
+  console.log("THIS IS THE SLUG =>", slug);
+
   return (
     <main className={`${styles.main} w-screen flex flex-col`}>
       <section className={`${styles.success} w-[100%] h-[80vh] flex`}>
@@ -86,7 +93,7 @@ const page = () => {
       
       {/* Activity Details */}
       <section className="container flex flex-col py-7">
-        <EventDetails />
+        {/* <EventDetails/> */}
       </section>
     </main>
   );

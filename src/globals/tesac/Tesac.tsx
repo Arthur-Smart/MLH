@@ -59,7 +59,7 @@ const Tesac = ({activity}:{activity:IActivity}) => {
 
     <div className="p-2">
       <h1 className="font-medium text-[15px]">{activity.title}</h1>
-      <p className="text-[#333333] text-[14px]">{activity.description}</p>
+      <p className="text-[#333333] text-[14px]">{activity.description.slice(0, 20)}</p>
       <div className="flex items-center justify-between mt-3">
         <div className="flex items-center gap-[4px]">
           <Image src={CALENDAR} alt="CMEs calenda" width={15} height={15} />
@@ -105,10 +105,14 @@ const Tesac = ({activity}:{activity:IActivity}) => {
             <p className="text-[14px] text-black/70">Hybrid</p>
           </div>
         )}
-        <div className="flex items-center gap-[4px]">
+        {activity.event_type == "free" ? (<div className="flex items-center gap-[4px]">
+          <Image src={MONEY} alt="CMEs calenda" width={20} height={20} />
+          <p className="text-[14px] text-black/70">Free</p>
+        </div>) : (<div className="flex items-center gap-[4px]">
           <Image src={MONEY} alt="CMEs calenda" width={20} height={20} />
           <p className="text-[14px] text-black/70">Paid</p>
-        </div>
+        </div>)}
+        
       </div>
       <div className="flex items-center justify-between mt-4">
         <Link href={`/registration/${activity.id}`}>

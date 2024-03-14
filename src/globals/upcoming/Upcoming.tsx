@@ -1,8 +1,25 @@
-import React from 'react'
+"use state"
+
+import React, { useEffect, useState } from 'react'
 import Activity from '../activity/Activity'
 import styles from "./upcoming.module.css"
+import axios from 'axios'
+import { IActivity } from '@/interface/ActivityInterface'
+import Tesac from '../tesac/Tesac'
 
 const Upcoming = () => {
+  const [activities, setActivities] = useState<IActivity[]>([]);
+
+  useEffect(() => {
+    const getUpcomingActivities = async() => {
+      const data = await axios.get(
+        "https://api-mlh.vercel.app/api/v1/events/upcoming_events"
+      );
+      setActivities(data.data.results)
+    };
+    getUpcomingActivities();
+  }, []);
+
   return (
     <div className="w-full mt-9 flex flex-col items-center justify-center">
     <div className="w-full flex items-center justify-between">
@@ -20,12 +37,10 @@ const Upcoming = () => {
     </div>
 
     <div className={`${styles.upcoming_activities_wrapper} w-full flex mt-5`}>
-      <Activity/>
-      <Activity/>
-      <Activity/>
-      <Activity/>
-      <Activity/>
-      <Activity/>
+    {activities?.map((activity: IActivity) => (
+            // <Activity key={activity.id}  {...activity} />
+            <Tesac key={activity.id} activity={activity}/>
+        ))}
     </div>
   </div>
   )

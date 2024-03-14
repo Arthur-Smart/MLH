@@ -2,7 +2,8 @@ import React from 'react'
 import styles from './learningactivities.module.css'
 import LearningActivity from '../learningactivity/LearningActivity'
 
-const LearningActivities = () => {
+const LearningActivities = ({id}:any) => {
+    // console.log("THIS IS THE ID =>", id)
   return (
     <main className="w-full flex flex-col justify-center">
         <div className="flex items-center gap-3">

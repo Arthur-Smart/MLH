@@ -15,6 +15,8 @@ const page = () => {
   const [selected, setSelected] = useState(1);
   const [organization, setOrganization] = useState<IOrganization>();
 
+  console.log("THIS ARE THE ORGANIZATION DATA =>", organization)
+
   const { slug }:any = useParams();
 
   console.log(slug);
@@ -131,7 +133,7 @@ const page = () => {
         {/* Highlight & Learning Section */}
         <div className="w-full mt-5">
           {/* <Highlights/> */}
-          {selected == 1 ? <Highlights /> : <LearningActivities />}
+          {selected == 1 ? <Highlights /> : <LearningActivities id={organization?.id}/>}
         </div>
       </section>
     </main>

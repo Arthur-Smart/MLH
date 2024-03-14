@@ -6,11 +6,22 @@ import { Inputs } from "@/interface/FormInterface";
 import { useForm, SubmitHandler } from "react-hook-form";
 import apiService from "@/libs/utils";
 import { IProfession } from "@/interface/ActivityInterface";
+import axios from "axios";
 
-const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}: any) => {
+const FulltimeForm = ({
+  departments,
+  wards,
+  selectedOption,
+  locations,
+  event_id,
+  email
+}: any) => {
   const router = useRouter();
 
   const [professions, setProfessions] = useState<IProfession[]>([]);
+  const [apiRes, setApiRes] = useState<string | undefined>();
+
+  console.log("THIS IS THE RESPONSE =>", apiRes);
 
   //GET PROFESSIONS
   const getProffesion = async () => {
@@ -36,23 +47,33 @@ const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}
     formState: { errors, isSubmitting },
   } = useForm<Inputs>();
 
+  // REGISTER FOR AN ACTIVITY
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-
     delete data.skip;
     delete data.terms;
 
+    try {
+      // }
+      let res: any = await axios.post(
+        "https://api-mlh.vercel.app/api/v1/events/enrollment/users",
+        JSON.stringify(data),
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("THIE =>", res.data.response[0].details[0].message);
+      setApiRes(res.data.response[0].details[0].message);
 
+      // if(apiRes){
+        router.replace(`/success/${event_id}`)
+      // }
 
-    console.log(data);
-    await new Promise((resolve) => setTimeout(resolve, 2500));
-
-    console.log(data);
-
-    const response = await apiService.post(
-      "api/v1/events/enrollment/users",
-      data
-    );
-
+    } catch (error) {
+      console.log("THIS IS THE ERROR =>", error);
+    }
   };
 
   return (
@@ -61,29 +82,36 @@ const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}
         defaultValue={event_id}
         {...register("event_id", { required: true })}
         readOnly
-        style={{display:"none"}}
+        style={{ display: "none" }}
       />
-       <input
+      <input
         defaultValue="Title"
         {...register("title", { required: true })}
         readOnly
-        style={{display:"none"}}
+        style={{ display: "none" }}
       />
-       <input
-        defaultValue="rhrjhjerh"
-        {...register("enrolled_events", { required: true })}
+      <input
+        defaultValue={selectedOption}
+        {...register("type", { required: true })}
         readOnly
-        style={{display:"none"}}
+        style={{ display: "none" }}
       />
+      <input
+        defaultValue="workplace"
+        {...register("workplace", { required: true })}
+        readOnly
+        style={{ display: "none" }}
+      />
+
       <div className="w-full flex flex-col md:flex-row items-center gap-2">
         <div className="w-full md:w-[33.33%] flex items-start flex-col mt-4">
           <label className="text-[15px] text-[#666666]">
             Email <span className="text-red-700">*</span>
           </label>
           <input
-            defaultValue="johndoe@gmail.com"
+            defaultValue={email}
             {...register("email", { required: true })}
-            readOnly
+            // readOnly
             className={
               errors.email
                 ? "w-full border-[#ED0000]] border-[1px] rounded-md py-[7px] px-3 outline-0"
@@ -144,8 +172,8 @@ const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}
             {...register("profession")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
-            {professions.map((profession) => (
-              <option value={profession.id}>{profession.name}</option>
+            {professions?.map((profession) => (
+              <option value={profession.name}>{profession.name}</option>
             ))}
           </select>
         </div>
@@ -173,13 +201,18 @@ const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}
           <select
             {...register("ward")}
             className={
-              errors.workplace
+              errors.ward
                 ? "w-full border-[#ED0000] border-[1px] rounded-md py-[7px]  px-3 outline-0"
                 : "w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
             }
           >
-            {wards.map((ward: any) => (
-              <option key={ward.id} value={ward.id}>{ward.name}</option>
+            {wards?.map((ward: any) => (
+              <option
+                key={ward.id}
+                value="b34e4f02-523b-4dd6-a7f3-c3566d63db72"
+              >
+                {ward.name}
+              </option>
             ))}
           </select>
         </div>
@@ -194,9 +227,11 @@ const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}
             {...register("location")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
-            {locations?.map((location:any) => (
-              <option key={location.id} value={location.id}>{location.name}</option>
-            ))} 
+            {locations?.map((location: any) => (
+              <option key={location.id} value={location.id}>
+                {location.name}
+              </option>
+            ))}
           </select>
           {/* {errors.lastname && <span>This field is required</span>} */}
         </div>
@@ -208,7 +243,7 @@ const FulltimeForm = ({ departments, wards, selectedOption, locations, event_id}
             {...register("department")}
             className="w-full border-[#A3A3A3] border-[1px] rounded-md py-[7px]  px-3 outline-0"
           >
-            {departments.map((department: any) => (
+            {departments?.map((department: any) => (
               <option value={department.id}>{department.name}</option>
             ))}
           </select>

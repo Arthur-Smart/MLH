@@ -50,7 +50,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
         ))}
       </div>
       {visibleActivities < featured.length && (
-        <button onClick={() => loadMoreActivities} className={loader ? "mt-3 py-2 px-3 bg-[#3E2C78]/70 rounded-full text-white hover:bg-[#3E2C78]/90" : "mt-3 py-2 px-3 bg-[#3E2C78] rounded-full text-white hover:bg-[#3E2C78]/90"}>
+        <button onClick={() => loadMoreActivities()} className={loader ? "mt-3 py-2 px-3 bg-[#3E2C78]/70 rounded-full text-white hover:bg-[#3E2C78]/90" : "mt-3 py-2 px-3 bg-[#3E2C78] rounded-full text-white hover:bg-[#3E2C78]/90"}>
           {loader ? "Loading ..." : "Load more"}
         </button>
       )}

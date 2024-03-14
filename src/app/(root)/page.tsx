@@ -11,11 +11,13 @@ import PastActivities from "@/globals/pastactivities/PastActivities";
 import apiService from "@/libs/utils";
 import { IActivity } from "@/interface/ActivityInterface";
 import Activity from "@/globals/activity/Activity";
+import OngoingEvents from "@/globals/ongoingevents/OngoingEvents";
+import axios from "axios";
 
 const Home = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
-  // console.log("THIS ARE THE ACTVS=>", activities);
-
+  const [featured, setFeatured] = useState<IActivity[]>([]);
+  console.log("THIS ARE THE FEATURED =>", featured)
   
 
   //GET ALL THE ACTIVITIES
@@ -33,8 +35,20 @@ const Home = () => {
   },[]);
 
 
+  // GET FEATURES ACTIVITIES
+  useEffect(() => {
+    const featuredEvents = async() => {
+      const data = await axios.get(
+        "https://api-mlh.vercel.app/api/v1/events/featured_events"
+      );
+      setFeatured(data.data.results)
+    };
+    featuredEvents();
+  }, []);
 
-  const featuredActivities = activities.filter((activity) => activity.is_featured == true);
+
+  const featuredActivities = featured;
+  // const featuredActivities = activities.filter((activity) => activity.is_featured == true);
    // console.log("THIS ARE THE FEATURED ACTIVITIES =>", featuredActivities)
 
   return (
@@ -85,6 +99,7 @@ const Home = () => {
         </div>
         <div className="w-full flex flex-col items-center justify-center">
           <Ongoing />
+          {/* <OngoingEvents/> */}
           <Upcoming />
           <FeaturedOrganization />
           <PastActivities />
