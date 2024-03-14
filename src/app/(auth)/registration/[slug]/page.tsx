@@ -45,8 +45,6 @@ export default function Home() {
   const [locations, setLocation] = useState<ILocation[]>([]);
   const [email, setEmail] = useState<string>("");
 
-
-
   // EVENTS DAYS HOURS MINS SECS COUNTER
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -57,7 +55,7 @@ export default function Home() {
   const ActivityDetailRef = useRef<HTMLDivElement>(null);
 
   const hasHappened = days == 0 || hours == 0 || minutes == 0 || seconds == 0;
-  
+
   // console.log("THIS IS THE ACTIVITY=>", event);
   // console.log("THIS ARE THE WARDS =>", wards)
 
@@ -122,7 +120,7 @@ export default function Home() {
   const orgDepartments = departments.filter(
     (department) => department?.organization == organization?.id
   );
-  
+
   //GET PROFESSIONS
   const getProffesion = async () => {
     await fetch("https://api-mlh.vercel.app/api/v1/professions/", {
@@ -155,7 +153,6 @@ export default function Home() {
     getWards();
   }, []);
 
-
   // GET ORGANIZATION WARDS
   const orgWards = wards.filter(
     (ward) => ward?.organization_id == organization?.id
@@ -177,7 +174,9 @@ export default function Home() {
   }, []);
 
   //GET ORGANIZATION LOCATIONS
-  const orgLocations = locations.filter((location) => location.organization_id == organization?.id);
+  const orgLocations = locations.filter(
+    (location) => location.organization_id == organization?.id
+  );
 
   //COUNTER
   setInterval(updateCountdown, 1000);
@@ -186,13 +185,11 @@ export default function Home() {
     const eventDate: any = new Date(event?.start_date ?? "");
 
     const currentDate: any = new Date();
-    console.log(eventDate)
-    console.log(currentDate)
-    
+    console.log(eventDate);
+    console.log(currentDate);
 
     const timeDifference = eventDate - currentDate;
-    console.log(timeDifference)
-
+    console.log(timeDifference);
 
     if (timeDifference > 0) {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -222,7 +219,7 @@ export default function Home() {
   const onSubmit: SubmitHandler<IEmail> = (data) => {
     console.log(data);
     setIsEmail(true);
-    setEmail(data.email)
+    setEmail(data.email);
     setShowModal(true);
     setTimeout(() => {
       setContentLoaded(true);
@@ -247,11 +244,16 @@ export default function Home() {
           {/* Counter */}
           <div className="flex items-center mt-7">
             {hasHappened ? (
-              <p className="text-white text-center">
-                The learning activity has already happened.<br></br> However,
-                the learning materials are available. Please Register to access
-                them.Thank you!
-              </p>
+              // <p className="text-white text-center">
+              //   The learning activity has already happened.<br></br> However,
+              //   the learning materials are available. Please Register to access
+              //   them.Thank you!
+              // </p>
+              <>
+                {" "}
+                <p>Activity in progress. Join now</p>
+                <button className="bg-[#AAA2C4] w-[250px] py-2 px-2 rounded-sm text-[#2C2C74] mt-11">Join now</button>
+              </>
             ) : (
               <>
                 {/* Time and date */}
@@ -398,9 +400,9 @@ export default function Home() {
                         departments={orgDepartments}
                         wards={orgWards}
                         selectedOption={selectedOption}
-                        locations= {orgLocations}
-                        event_id = {event?.id}
-                        email = {email}
+                        locations={orgLocations}
+                        event_id={event?.id}
+                        email={email}
                       />
                     )}
                     {selectedOption == "locum" && (
@@ -408,18 +410,20 @@ export default function Home() {
                         departments={orgDepartments}
                         wards={orgWards}
                         selectedOption={selectedOption}
-                        locations= {orgLocations}
-                        event_id = {event?.id}
-                        email = {email}
+                        locations={orgLocations}
+                        event_id={event?.id}
+                        email={email}
                       />
                     )}
                     {selectedOption == "external" && (
-                      <VisitorsForm departments={orgDepartments}
-                      wards={orgWards}
-                      selectedOption={selectedOption}
-                      locations= {orgLocations}
-                      event_id = {event?.id}
-                      email = {email}/>
+                      <VisitorsForm
+                        departments={orgDepartments}
+                        wards={orgWards}
+                        selectedOption={selectedOption}
+                        locations={orgLocations}
+                        event_id={event?.id}
+                        email={email}
+                      />
                     )}
                   </div>
                 </div>

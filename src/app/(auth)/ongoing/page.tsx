@@ -39,7 +39,7 @@ const page = () => {
       </div>
        {/* Activity Details */}
        <section  className="container flex flex-col py-7">
-        <EventDetails />
+        {/* <EventDetails /> */}
       </section>
     </main>
   );
